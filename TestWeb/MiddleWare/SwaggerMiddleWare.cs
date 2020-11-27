@@ -2,8 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace WebApi.MiddleWare
 {
@@ -22,6 +24,9 @@ namespace WebApi.MiddleWare
                     Description="Swagger Test",
                     Version= Configuration["Swagger:Version"],
                 });
+
+                string xmlPath = Path.Combine(AppContext.BaseDirectory, $"WebApi.xml");
+                option.IncludeXmlComments(xmlPath);
             });
         }
     }

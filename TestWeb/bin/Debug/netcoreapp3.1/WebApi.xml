@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:WebApi.Controllers.WeatherForecastController.Get">
+            <summary>
+            WeatherForecast  
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:WebApi.MiddleWare.MySqlMiddleWare">
+            <summary>
+            Mysql  中间件
+            </summary>
+        </member>
+        <member name="T:WebApi.MiddleWare.SwaggerMiddleWare">
+            <summary>
+            Swagger 中间件
+            </summary>
+        </member>
+    </members>
+</doc>

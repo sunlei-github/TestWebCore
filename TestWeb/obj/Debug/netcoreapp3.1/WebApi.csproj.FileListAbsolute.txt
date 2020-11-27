@@ -41,3 +41,4 @@ E:\VS_Test_WorkSpace\CoreWebApiGitHub\TestWeb\obj\Debug\netcoreapp3.1\WebApi.dll
 E:\VS_Test_WorkSpace\CoreWebApiGitHub\TestWeb\obj\Debug\netcoreapp3.1\WebApi.pdb
 E:\VS_Test_WorkSpace\CoreWebApiGitHub\TestWeb\obj\Debug\netcoreapp3.1\WebApi.genruntimeconfig.cache
 E:\VS_Test_WorkSpace\CoreWebApiGitHub\TestWeb\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+E:\VS_Test_WorkSpace\CoreWebApiGitHub\TestWeb\bin\Debug\netcoreapp3.1\WebApi.xml

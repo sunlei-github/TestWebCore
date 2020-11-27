@@ -22,7 +22,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "WebApi/1.0.0": {
+      "ccc/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Design": "3.1.0",
           "Microsoft.EntityFrameworkCore.Tools": "3.1.0",
@@ -313,10 +313,10 @@
           "WindowsBase": "4.0.0.0"
         },
         "runtime": {
-          "WebApi.dll": {}
+          "ccc.dll": {}
         },
         "compile": {
-          "WebApi.dll": {}
+          "ccc.dll": {}
         }
       },
       "Microsoft.Bcl.AsyncInterfaces/1.1.0": {
@@ -2294,7 +2294,7 @@
     }
   },
   "libraries": {
-    "WebApi/1.0.0": {
+    "ccc/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

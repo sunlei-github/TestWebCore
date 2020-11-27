@@ -23,6 +23,10 @@ namespace WebApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// WeatherForecast  
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {

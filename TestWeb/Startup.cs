@@ -29,8 +29,8 @@ namespace WebApi
         {
             services.AddControllers();
 
-            //services.AddMySql(Configuration);
-            //services.AddSwagger(Configuration);
+            services.AddMySql(Configuration);
+            services.AddSwagger(Configuration);
 
         }
 
@@ -43,11 +43,11 @@ namespace WebApi
             }
 
             #region Ê¹ÓÃSwaggerUI
-            //app.UseSwagger();
-            //app.UseSwaggerUI(option =>
-            //{
-            //    option.SwaggerEndpoint($"/swagger/{Configuration["Swagger:Version"]}/swagger.json", Configuration["Swagger:Name"]);
-            //}); 
+            app.UseSwagger();
+            app.UseSwaggerUI(option =>
+            {
+                option.SwaggerEndpoint($"/swagger/{Configuration["Swagger:Name"]}/swagger.json", Configuration["Swagger:Name"]);
+            });
             #endregion
 
             app.UseRouting();

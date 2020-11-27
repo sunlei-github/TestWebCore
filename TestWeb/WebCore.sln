@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi.csproj", "{CFF2220A-3A4B-407A-9356-12FC90D7E0F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.EntityFramework", "..\WebApi.EntityFramework\WebApi.EntityFramework.csproj", "{32FF61CB-4E7E-4B31-85B3-CB8A9AEF1887}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.EntityFramework", "..\WebApi.EntityFramework\WebApi.EntityFramework.csproj", "{32FF61CB-4E7E-4B31-85B3-CB8A9AEF1887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Core", "..\WebApi.Core\WebApi.Core.csproj", "{2674A47C-D081-443B-B8CD-BF69E7F483BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.Core", "..\WebApi.Core\WebApi.Core.csproj", "{2674A47C-D081-443B-B8CD-BF69E7F483BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
