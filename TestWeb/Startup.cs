@@ -1,4 +1,5 @@
 using Autofac;
+using log4net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi.EntityFramework;
+using log4net.Config;
 using WebApi.MiddleWare;
+using System.IO;
 
 namespace WebApi
 {

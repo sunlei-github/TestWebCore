@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.EntityFramework", ".
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.Core", "..\WebApi.Core\WebApi.Core.csproj", "{2674A47C-D081-443B-B8CD-BF69E7F483BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Application", "..\WebApi.Application\WebApi.Application.csproj", "{23917C6F-27BA-4653-82DF-08E01A59FD36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.Application", "..\WebApi.Application\WebApi.Application.csproj", "{23917C6F-27BA-4653-82DF-08E01A59FD36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.IApplication", "..\WebApi.IApplication\WebApi.IApplication.csproj", "{2A31030E-773B-4B68-BF95-624B19A31196}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.IApplication", "..\WebApi.IApplication\WebApi.IApplication.csproj", "{2A31030E-773B-4B68-BF95-624B19A31196}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.Common", "..\WebApi.Common\WebApi.Common.csproj", "{8F3A1948-6E6F-4C8F-8A10-E71E9D4401BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2A31030E-773B-4B68-BF95-624B19A31196}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A31030E-773B-4B68-BF95-624B19A31196}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A31030E-773B-4B68-BF95-624B19A31196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3A1948-6E6F-4C8F-8A10-E71E9D4401BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3A1948-6E6F-4C8F-8A10-E71E9D4401BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3A1948-6E6F-4C8F-8A10-E71E9D4401BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3A1948-6E6F-4C8F-8A10-E71E9D4401BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

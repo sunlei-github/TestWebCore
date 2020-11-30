@@ -860,6 +860,19 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "WebApi.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "log4net": "2.0.12"
+        },
+        "compile": {
+          "bin/placeholder/WebApi.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApi.Common.dll": {}
+        }
+      },
       "WebApi.Core/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -3456,6 +3469,11 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "WebApi.Common/1.0.0": {
+      "type": "project",
+      "path": "../WebApi.Common/WebApi.Common.csproj",
+      "msbuildProject": "../WebApi.Common/WebApi.Common.csproj"
+    },
     "WebApi.Core/1.0.0": {
       "type": "project",
       "path": "../WebApi.Core/WebApi.Core.csproj",
@@ -3481,6 +3499,7 @@
       "Pomelo.EntityFrameworkCore.MySql >= 3.1.0",
       "Swashbuckle.AspNetCore.SwaggerGen >= 5.6.3",
       "Swashbuckle.AspNetCore.SwaggerUI >= 5.6.3",
+      "WebApi.Common >= 1.0.0",
       "WebApi.EntityFramework >= 1.0.0",
       "WebApi.IApplication >= 1.0.0",
       "log4net >= 2.0.12"
@@ -3518,6 +3537,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
+            "E:\\VS_Test_WorkSpace\\CoreWebApiGitHub\\WebApi.Common\\WebApi.Common.csproj": {
+              "projectPath": "E:\\VS_Test_WorkSpace\\CoreWebApiGitHub\\WebApi.Common\\WebApi.Common.csproj"
+            },
             "E:\\VS_Test_WorkSpace\\CoreWebApiGitHub\\WebApi.EntityFramework\\WebApi.EntityFramework.csproj": {
               "projectPath": "E:\\VS_Test_WorkSpace\\CoreWebApiGitHub\\WebApi.EntityFramework\\WebApi.EntityFramework.csproj"
             },
