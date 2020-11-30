@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Qm72pP/H6GvYOBhpbUoZchdUFVHg0VkS0ruxuO+xJnMplMMLeRTNaAfaRdZSnUcYVflaW9Y4FcOTV276jm95ew==",
+  "success": true,
+  "projectFilePath": "E:\\VS_Test_WorkSpace\\CoreWebApiGitHub\\WebApi.Vue\\WebApi.Vue.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sunlei\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\sunlei\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
