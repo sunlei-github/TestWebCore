@@ -1,9 +1,0 @@
-E:\VS_Test_WorkSpace\CoreWebApiGitHub\WebApi.Common\bin\Debug\netstandard2.0\WebApi.Common.deps.json
-E:\VS_Test_WorkSpace\CoreWebApiGitHub\WebApi.Common\bin\Debug\netstandard2.0\WebApi.Common.dll
-E:\VS_Test_WorkSpace\CoreWebApiGitHub\WebApi.Common\bin\Debug\netstandard2.0\WebApi.Common.pdb
-E:\VS_Test_WorkSpace\CoreWebApiGitHub\WebApi.Common\obj\Debug\netstandard2.0\WebApi.Common.csprojAssemblyReference.cache
-E:\VS_Test_WorkSpace\CoreWebApiGitHub\WebApi.Common\obj\Debug\netstandard2.0\WebApi.Common.AssemblyInfoInputs.cache
-E:\VS_Test_WorkSpace\CoreWebApiGitHub\WebApi.Common\obj\Debug\netstandard2.0\WebApi.Common.AssemblyInfo.cs
-E:\VS_Test_WorkSpace\CoreWebApiGitHub\WebApi.Common\obj\Debug\netstandard2.0\WebApi.Common.csproj.CoreCompileInputs.cache
-E:\VS_Test_WorkSpace\CoreWebApiGitHub\WebApi.Common\obj\Debug\netstandard2.0\WebApi.Common.dll
-E:\VS_Test_WorkSpace\CoreWebApiGitHub\WebApi.Common\obj\Debug\netstandard2.0\WebApi.Common.pdb
