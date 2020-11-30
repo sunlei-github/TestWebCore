@@ -16,6 +16,7 @@ using WebApi.EntityFramework;
 using log4net.Config;
 using WebApi.MiddleWare;
 using System.IO;
+using WebApi.Moudle;
 
 namespace WebApi
 {
@@ -38,11 +39,14 @@ namespace WebApi
 
         }
 
-        //public void ConfigureContainer(ContainerBuilder containerBuilder)
-        //{
-        //    Console.WriteLine("dasdas");
-        //    //containerBuilder
-        //}
+        /// <summary>
+        /// ÅäÖÃAutofacµÄ·þÎñ×¢²á
+        /// </summary>
+        /// <param name="containerBuilder"></param>
+        public void ConfigureContainer(ContainerBuilder containerBuilder)
+        {
+            containerBuilder.RegisterModule<AutofacMoudle>();
+        }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

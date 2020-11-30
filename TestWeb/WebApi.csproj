@@ -9,8 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Vue\" />
-    <Folder Include="Moudle\" />
+    <Compile Remove="Vue\**" />
+    <Content Remove="Vue\**" />
+    <EmbeddedResource Remove="Vue\**" />
+    <None Remove="Vue\**" />
   </ItemGroup>
 
   <ItemGroup>
