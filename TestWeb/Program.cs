@@ -1,3 +1,4 @@
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +22,13 @@ namespace WebApi
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).ConfigureLogging((context, builder) =>
+                {
+                    //可以显示指定log4net的配置文件
+                    builder.AddLog4Net();
+                })
+                //使用ActoFac 容器进行依赖注入
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
     }
 }

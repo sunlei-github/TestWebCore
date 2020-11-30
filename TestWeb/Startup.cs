@@ -1,3 +1,4 @@
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,13 @@ namespace WebApi
             services.AddSwagger(Configuration);
 
         }
+
+        //public void ConfigureContainer(ContainerBuilder containerBuilder)
+        //{
+        //    Console.WriteLine("dasdas");
+        //    //containerBuilder
+        //}
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
