@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using WebApi.Core.BaseEntity;
+using WebApi.Core.Entity.Resource;
 using WebApi.Core.Enum.User;
 
 namespace WebApi.Core.Entity.User
@@ -13,10 +14,21 @@ namespace WebApi.Core.Entity.User
         public int Id { get; set; }
 
         /// <summary>
-        /// 姓名
+        /// 姓
         /// </summary>
-        [StringLength(50)]
-        public string Name { set; get; }
+        [StringLength(10)]
+        public string First_Name { set; get; }
+
+        /// <summary>
+        /// 名
+        /// </summary>
+        [StringLength(10)]
+        public string Last_Name { set; get; }
+
+        /// <summary>
+        /// 全名
+        /// </summary>
+        public string FullName { set; get; }
 
         /// <summary>
         /// 性别
@@ -48,5 +60,11 @@ namespace WebApi.Core.Entity.User
         public int User_AccountUser_Id { set; get; }
 
         public DbAccountUser DbAccountUser { set; get; }
+
+        public ICollection<DbImageResource> DbImageResources { set; get; }
+
+        //public ICollection<DbMusicResource> DbMusicResources { set; get; }
+
+        //public ICollection<DbVedioResource> DbVedioResources { set; get; }
     }
 }

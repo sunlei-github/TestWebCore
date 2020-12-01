@@ -12,4 +12,9 @@
     <ProjectReference Include="..\WebApi.Core\WebApi.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="IServices\IImageResource\" />
+    <Folder Include="IServices\IMusicrResource\" />
+  </ItemGroup>
+
 </Project>

@@ -42,9 +42,6 @@ namespace WebApi.Core.Entity.User
         /// </summary>
         public int AccountFailedCount { set; get; }
 
-        [ForeignKey("DbUser")]
-        public int AccountUser_User_Id { set; get; }
-
         public DbUser DbUser { set; get; }
     }
 }
