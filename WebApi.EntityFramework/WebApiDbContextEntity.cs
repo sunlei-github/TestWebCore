@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using WebApi.Core.Entity.HotResource;
 using WebApi.Core.Entity.Resource;
+using WebApi.Core.Entity.SystemLog;
 using WebApi.Core.Entity.User;
 
 namespace WebApi.EntityFramework
@@ -36,6 +37,6 @@ namespace WebApi.EntityFramework
 
         public DbSet<DbHotVedioResourceUser> HotVedioResourceUsers { set; get; }
 
-
+        public DbSet<DbAuditLog> DbAuditLogs { set; get; }
     }
 }

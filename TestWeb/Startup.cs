@@ -17,6 +17,10 @@ using log4net.Config;
 using WebApi.MiddleWare;
 using System.IO;
 using WebApi.Moudle;
+using WebApi.Repository.Repository;
+using WebApi.IApplication.IServices.IAccount;
+using WebApi.Application.Services;
+using WebApi.Attribute;
 
 namespace WebApi
 {
@@ -32,10 +36,17 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(mvcOption =>
+            {
+                mvcOption.Filters.Add<GlobalExpectionFilter>();
+            });
 
             services.AddMySql(Configuration);
             services.AddSwagger(Configuration);
+
+
+            services.AddScoped(typeof(IRepositoryServices<>), typeof(RepositoryServices<>));
+            services.AddScoped<IAccountServices, AccountServices>();
 
         }
 
@@ -61,9 +72,11 @@ namespace WebApi
             app.UseSwagger();
             app.UseSwaggerUI(option =>
             {
-                option.SwaggerEndpoint($"/swagger/{Configuration["Swagger:Name"]}/swagger.json", Configuration["Swagger:Name"]);
+                option.SwaggerEndpoint($"/swagger/{Configuration["Swagger:Name"]}/swagger.json", Configuration["Swagger:Version"]);
             });
             #endregion
+
+            app.UseAuditlog();
 
             app.UseRouting();
 

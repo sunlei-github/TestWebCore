@@ -22,7 +22,7 @@ namespace WebApi.MiddleWare
                 {
                     Title="MySwagger",
                     Description="Swagger Test",
-                    Version= Configuration["Swagger:Name"],
+                    Version= Configuration["Swagger:Version"],
                 });
 
                 string xmlPath = Path.Combine(AppContext.BaseDirectory, "WebApi.xml");

@@ -1,23 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WebApi.Core.Entity.User;
 using WebApi.EntityFramework;
 using WebApi.IApplication.Dto.Account;
 using WebApi.IApplication.IServices.IAccount;
+using WebApi.Repository.Repository;
 
 namespace WebApi.Application.Services
 {
     public class AccountServices : BaseServices, IAccountServices
     {
-        private WebApiDbContext _webApiDbContext = null;
+        private IRepositoryServices<DbAccountUser>  _accountUserRepository = null;
 
-        public AccountServices(WebApiDbContext webApiDbContext)
+        public AccountServices(IRepositoryServices<DbAccountUser> accountUserRepository)
         {
-            _webApiDbContext = webApiDbContext;
+            _accountUserRepository = accountUserRepository;
         }
 
         public LoginInOutput LoginIn(LoginInput input)
         {
+            var dd = _accountUserRepository.FindSingleEntity(1);
+
+
             return new LoginInOutput
             {
                 AccountSatus = Core.Enum.User.AccountSatusEnum.Disabled,
