@@ -7,14 +7,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
 
-namespace WebApi.MiddleWare
+namespace WebApi.ConfigureServices
 {
     /// <summary>
     /// Swagger 中间件
     /// </summary>
-    public static class SwaggerMiddleWare
+    public static class SwaggerServices
     {
-        public static IServiceCollection AddSwagger(this IServiceCollection serviceCollection, IConfiguration Configuration)
+        public static IServiceCollection ConfSwaggerServices(this IServiceCollection serviceCollection, IConfiguration Configuration)
         {
             return serviceCollection.AddSwaggerGen(option =>
             {

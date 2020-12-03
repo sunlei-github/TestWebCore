@@ -21,7 +21,11 @@ namespace WebApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>().UseKestrel(c =>
+                    {
+                        //不限制请求体大小  上传大文件时 可能会报错 this.Request.Form.Files Request body too large.
+                        c.Limits.MaxRequestBodySize = null;
+                    });
                 }).ConfigureLogging((context, builder) =>
                 {
                     //可以显示指定log4net的配置文件

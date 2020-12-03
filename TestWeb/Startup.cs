@@ -21,6 +21,10 @@ using WebApi.Repository.Repository;
 using WebApi.IApplication.IServices.IAccount;
 using WebApi.Application.Services;
 using WebApi.Attribute;
+using WebApi.ConfigureServices;
+using Microsoft.AspNetCore.Http.Features;
+using WebApi.IApplication.IServices.IResource;
+using WebApi.Application.Resource;
 
 namespace WebApi
 {
@@ -41,13 +45,22 @@ namespace WebApi
                 mvcOption.Filters.Add<GlobalExpectionFilter>();
             });
 
-            services.AddMySql(Configuration);
-            services.AddSwagger(Configuration);
-
+            services.ConfMySqlServices(Configuration);
+            services.ConfSwaggerServices(Configuration);
 
             services.AddScoped(typeof(IRepositoryServices<>), typeof(RepositoryServices<>));
             services.AddScoped<IAccountServices, AccountServices>();
+            services.AddScoped<IMusicServices, MusicServices>();
+            services.AddScoped<IImageServices, ImageServices>();
+            services.AddScoped<IVedioServices, VedioServices>();
 
+
+            //设置上传文件的大小为最大  否则会报错Failed to read the request form. Multipart body length limit 134217728 exceeded
+            services.Configure<FormOptions>(option =>
+            {
+                option.ValueLengthLimit = int.MaxValue;
+                option.MultipartBodyLengthLimit = int.MaxValue;
+            });
         }
 
         /// <summary>

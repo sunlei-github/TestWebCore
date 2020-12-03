@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using WebApi.Core.Entity.SystemLog;
 using WebApi.Repository.Repository;
 using Microsoft.Extensions.Logging;
+using WebApi.Core.Resut;
 
 namespace WebApi.Attribute
 {
@@ -41,10 +42,10 @@ namespace WebApi.Attribute
             var request = context.HttpContext.Request;
             if (await CheckIsAjaxRequest(request))
             {
-                context.Result = new JsonResult(new
+                context.Result = new JsonResult(new AjaxErrorResult
                 {
                     Title = "后台异常",
-                    Msg = "请求的数据出错了"
+                    ExpectionMessage = "请求的数据出错了"
                 });
             }
             else

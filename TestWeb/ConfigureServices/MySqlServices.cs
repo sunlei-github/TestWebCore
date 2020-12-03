@@ -7,14 +7,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApi.EntityFramework;
 
-namespace WebApi.MiddleWare
+namespace WebApi.ConfigureServices
 {
     /// <summary>
     /// Mysql  中间件
     /// </summary>
-    public static class MySqlMiddleWare
+    public static class MySqlServices
     {
-        public static IServiceCollection AddMySql(this IServiceCollection serviceCollection, IConfiguration Configuration)
+        public static IServiceCollection ConfMySqlServices(this IServiceCollection serviceCollection, IConfiguration Configuration)
         {
             return serviceCollection.AddDbContext<WebApiDbContext>(option =>
             {
