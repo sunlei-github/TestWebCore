@@ -28,14 +28,15 @@ namespace WebApi.Common.Utitly
                     string zipFileName = fileInfo.Name.Replace(fileInfo.Extension, FileConst.ZIP);
                     string zipFilePath = Path.Combine(zipDirectory, zipFileName);
 
+                    //将压缩文件添加到指定目录
                     if (!string.IsNullOrEmpty(targetZipDirectory))
                     {
                         PathUtitly.EnsurePhysicalPath(targetZipDirectory);
-                        zipFile.AddDirectory(targetZipDirectory);
-                        zipFilePath = targetZipDirectory;
+                        zipDirectory = targetZipDirectory;
+                        zipFilePath = Path.Combine(targetZipDirectory, zipFileName);
                     }
 
-                    zipFile.AddDirectory(zipFilePath);
+                    zipFile.AddDirectory(zipDirectory);
 
                     zipFile.AddFile(filePath);
                     zipFile.Save(zipFilePath);

@@ -42,8 +42,6 @@ namespace WebApi.Common.Utitly
             string zipPath = PathUtitly.PrepareRelativeUploadPath(basePath, "ZipSource");
             PathUtitly.EnsurePhysicalPath(zipPath);
 
-            CompressUtitly.CompressFile(fileFullPath, zipPath, @"D:\zip");
-
             return relativeFilePath;
         }
     }
