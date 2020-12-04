@@ -8,12 +8,10 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : WebApiBaseController
     {
 
-        private ILogger _logger = null;
+        private ILogger _logger = null; 
         private ILoggerFactory _loggerFactory;
 
         /// <summary>

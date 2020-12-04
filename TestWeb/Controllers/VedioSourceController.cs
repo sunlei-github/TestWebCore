@@ -15,9 +15,7 @@ using WebApi.IApplication.Dto.Account;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class VedioSourceController : ControllerBase
+    public class VedioSourceController : WebApiBaseController
     {
         private IVedioServices _vedioServices = null;
 

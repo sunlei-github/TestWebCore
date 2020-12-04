@@ -15,11 +15,9 @@ using WebApi.IApplication.Dto.Account;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class ImageSourceController : ControllerBase
+    public class ImageSourceController : WebApiBaseController
     {
-        private IImageServices  _imageServices = null;
+        private IImageServices _imageServices = null;
 
         public ImageSourceController(IImageServices imageServices)
         {

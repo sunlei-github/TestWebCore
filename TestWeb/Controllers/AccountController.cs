@@ -2,19 +2,21 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Common.Utitly;
 using WebApi.IApplication.Dto.Account;
 using WebApi.IApplication.IServices.IAccount;
+using Wlniao;
+using Microsoft.Net.Http.Headers;
 
 namespace WebApi.Controllers
 {
     /// <summary>
     /// 登陆/登出
     /// </summary>
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountController : WebApiBaseController
     {
         private IAccountServices _accountServices = null;
 
@@ -52,5 +54,6 @@ namespace WebApi.Controllers
 
             return result;
         }
+
     }
 }

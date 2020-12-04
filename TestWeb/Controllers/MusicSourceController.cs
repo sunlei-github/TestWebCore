@@ -15,9 +15,7 @@ using WebApi.IApplication.Dto.Account;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class MusicSourceController : ControllerBase
+    public class MusicSourceController : WebApiBaseController
     {
         private IMusicServices _musicServices = null;
 
