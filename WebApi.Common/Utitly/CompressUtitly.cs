@@ -18,7 +18,7 @@ namespace WebApi.Common.Utitly
         /// <param name="filePath">文件路径</param>
         /// <param name="zipDirectory">压缩的存放路径</param>
         /// <param name="targetZipDirectory">是否存放到指定目录</param>
-        public static void CompressFile(string filePath, string zipDirectory, string targetZipDirectory = null)
+        public static void CompressFile(string filePath, string zipDirectory, string password,string targetZipDirectory = null)
         {
             using (ZipFile zipFile = new ZipFile(Encoding.UTF8))
             {
@@ -34,6 +34,10 @@ namespace WebApi.Common.Utitly
                         PathUtitly.EnsurePhysicalPath(targetZipDirectory);
                         zipDirectory = targetZipDirectory;
                         zipFilePath = Path.Combine(targetZipDirectory, zipFileName);
+                    }
+                    if (!string.IsNullOrEmpty(password))
+                    {
+                        zipFile.Password = password;
                     }
 
                     zipFile.AddDirectory(zipDirectory);
