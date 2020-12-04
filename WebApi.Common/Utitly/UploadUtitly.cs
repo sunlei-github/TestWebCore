@@ -29,7 +29,8 @@ namespace WebApi.Common.Utitly
                 return result;
             }
 
-            string relativeUploadPath = PathUtitly.PrepareRelativeUploadPath(basePath, uploadDirectoy);
+            string baseRelativePath = Path.Combine(basePath, uploadDirectoy);
+            string relativeUploadPath = PathUtitly.PrepareDateUploadPath(baseRelativePath);
             string relativeFilePath = FileUtitly.PrepareRelativeUploadFile(relativeUploadPath, file.FileName);
             string fileFullPath = FileUtitly.GetFullUploadFile(relativeFilePath);
 
@@ -38,9 +39,6 @@ namespace WebApi.Common.Utitly
                 file.CopyTo(fileStream);
                 result = relativeFilePath;
             }
-
-            string zipPath = PathUtitly.PrepareRelativeUploadPath(basePath, "ZipSource");
-            PathUtitly.EnsurePhysicalPath(zipPath);
 
             return relativeFilePath;
         }

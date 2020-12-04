@@ -13,11 +13,11 @@ namespace WebApi.Common.Utitly
     public class DownloadUtitly
     {
         /// <summary>
-        /// 下载文件
+        /// 下载单个文件
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="filePath"></param>
-        public static async Task<Stream> DownloadFile(string fileName, string filePath)
+        public static async Task<Stream> DownloadFile(string filePath)
         {
             FileStream stream = null;
             if (File.Exists(filePath))

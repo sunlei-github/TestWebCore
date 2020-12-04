@@ -2,9 +2,13 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using WebApi.Common.Const;
+using WebApi.Common.Utitly;
 using WebApi.IApplication.Dto.Account;
+using WebApi.IApplication.Dto.Resource;
 using WebApi.IApplication.IServices.IResource;
 
 namespace WebApi.Application.Resource
@@ -19,17 +23,22 @@ namespace WebApi.Application.Resource
             _configuration = configuration;
         }
 
-        public ResourceOuput UploadMusic(IFormFile file)
+        public async Task<Stream> DownloadMusic(DownResourceInput input)
         {
-            return new ResourceOuput
+            return await DownloadUtitly.DownloadFile(input.FilePath);
+        }
+
+        public UploadResourceOuput UploadMusic(IFormFile file)
+        {
+            return new UploadResourceOuput
             {
                 UplaodPath = base.UploadFile(file, _configuration["UploadDiretory"], UploadSourceConst.UPLOAD_MUSIC)
             };
         }
 
-        public ResourcesOuput UploadMusics(List<IFormFile> files)
+        public UploadResourcesOuput UploadMusics(List<IFormFile> files)
         {
-            return new ResourcesOuput
+            return new UploadResourcesOuput
             {
                 UplaodPaths = base.UploadFiles(files, _configuration["UploadDiretory"], UploadSourceConst.UPLOAD_MUSIC)
             };

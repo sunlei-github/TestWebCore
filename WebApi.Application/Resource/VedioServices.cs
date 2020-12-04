@@ -2,9 +2,13 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using WebApi.Common.Const;
+using WebApi.Common.Utitly;
 using WebApi.IApplication.Dto.Account;
+using WebApi.IApplication.Dto.Resource;
 using WebApi.IApplication.IServices.IResource;
 
 namespace WebApi.Application.Resource
@@ -19,17 +23,22 @@ namespace WebApi.Application.Resource
             _configuration = configuration;
         }
 
-        public ResourceOuput UploadVedio(IFormFile file)
+        public async Task<Stream> DownloadVedio(DownResourceInput input)
         {
-            return new ResourceOuput
+            return await DownloadUtitly.DownloadFile(input.FilePath);
+        }
+
+        public UploadResourceOuput UploadVedio(IFormFile file)
+        {
+            return new UploadResourceOuput
             {
                 UplaodPath = base.UploadFile(file, _configuration["UploadDiretory"], UploadSourceConst.UPLOAD_VEDIO)
             };
         }
 
-        public ResourcesOuput UploadVedios(List<IFormFile> files)
+        public UploadResourcesOuput UploadVedios(List<IFormFile> files)
         {
-            return new ResourcesOuput
+            return new UploadResourcesOuput
             {
                 UplaodPaths = base.UploadFiles(files, _configuration["UploadDiretory"], UploadSourceConst.UPLOAD_VEDIO)
             };

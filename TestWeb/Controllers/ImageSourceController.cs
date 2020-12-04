@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using WebApi.Core.Resut;
 using WebApi.IApplication.IServices.IResource;
 using WebApi.IApplication.Dto.Account;
+using WebApi.IApplication.Dto.Resource;
 
 namespace WebApi.Controllers
 {
@@ -30,7 +31,7 @@ namespace WebApi.Controllers
         /// <param name="file"></param>
         /// <returns></returns>
         [HttpPost]
-        public ResourceOuput UploadImage(IFormFile file)
+        public UploadResourceOuput UploadImage(IFormFile file)
         {
             return _imageServices.UploadImage(file);
         }
@@ -41,11 +42,21 @@ namespace WebApi.Controllers
         /// <param name="files"></param>
         /// <returns></returns>
         [HttpPost]
-        public ResourcesOuput UploadImages(List<IFormFile> files)
+        public UploadResourcesOuput UploadImages(List<IFormFile> files)
         {
             return _imageServices.UploadImages(files);
         }
 
+        /// <summary>
+        /// 下载图片
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<FileStreamResult> DownloadImage(DownResourceInput input)
+        {
+            var result = await _imageServices.DownloadImage(input);
 
+            return CreateFileStreamResult(result, input.FileName);
+        }
     }
 }

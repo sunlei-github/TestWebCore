@@ -13,7 +13,7 @@ namespace WebApi.Common.Utitly
     public class CompressUtitly
     {
         /// <summary>
-        /// 压缩文件
+        /// 压缩单个文件
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <param name="zipDirectory">压缩的存放路径</param>

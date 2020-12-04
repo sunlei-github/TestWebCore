@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
-using WebApi.IApplication.Dto.Account;
+using System.Threading.Tasks;
+using WebApi.IApplication.Dto.Resource;
 
 namespace WebApi.IApplication.IServices.IResource
 {
@@ -14,13 +16,20 @@ namespace WebApi.IApplication.IServices.IResource
         /// <param name="file"></param>
         /// <returns></returns>
 
-        ResourceOuput UploadVedio(IFormFile file);
+        UploadResourceOuput UploadVedio(IFormFile file);
 
         /// <summary>
         /// 上传多个视频
         /// </summary>
         /// <param name="files"></param>
         /// <returns></returns>
-        ResourcesOuput UploadVedios(List<IFormFile> files);
+        UploadResourcesOuput UploadVedios(List<IFormFile> files);
+
+        /// <summary>
+        /// 下载视频
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        Task<Stream> DownloadVedio(DownResourceInput input);
     }
 }

@@ -10,7 +10,7 @@ using Wlniao;
 namespace WebApi
 {
     /// <summary>
-    /// BaseController 
+    /// WebApiBaseController 
     /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
@@ -24,7 +24,10 @@ namespace WebApi
         /// <param name="fileName"></param>
         protected virtual FileStreamResult CreateFileStreamResult(Stream stream, string fileName)
         {
-            return new FileStreamResult(stream, new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(fileName)));
+            var fileStreamResult = new FileStreamResult(stream, new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(fileName)));
+            fileStreamResult.FileDownloadName = fileName;
+
+            return fileStreamResult;
         }
     }
 }

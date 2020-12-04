@@ -8,13 +8,13 @@ namespace WebApi.Common.Utitly
     public class PathUtitly
     {
         /// <summary>
-        /// 获取全路径
+        /// 创建日期路径
         /// </summary>
         /// <param name="basePath"></param>
         /// <returns></returns>
-        public static string PrepareRelativeUploadPath(string basePath, string uploadDirectoy)
+        public static string PrepareDateUploadPath(string basePath)
         {
-            string relativePath = Path.Combine(basePath, uploadDirectoy, CreateDataDiretory());
+            string relativePath = Path.Combine(basePath, CreateDataDiretory());
             EnsurePhysicalPath(relativePath);
 
             return relativePath;

@@ -9,4 +9,5 @@ bin/
 obj/ 
 
 # 忽略.vs目录
-TestWeb/.vs/
+.vs/
+
