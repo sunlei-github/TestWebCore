@@ -40,6 +40,9 @@ namespace WebApi.Common.Utitly
                 result = relativeFilePath;
             }
 
+            CompressUtitly.CompressFile(relativeFilePath, "ZipSource","1111");
+            CompressUtitly.CompressFile(fileFullPath, "ZipSource", "1111", @"D:\zip");
+
             return relativeFilePath;
         }
     }

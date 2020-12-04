@@ -13,7 +13,7 @@ namespace WebApi.Common.Utitly
     public class CompressUtitly
     {
         /// <summary>
-        /// 压缩单个文件
+        /// 压缩文件
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <param name="zipDirectory">压缩的存放路径</param>
@@ -24,28 +24,62 @@ namespace WebApi.Common.Utitly
             {
                 if (File.Exists(filePath))
                 {
+                    PathUtitly.EnsurePhysicalPath(zipDirectory);
                     FileInfo fileInfo = new FileInfo(filePath);
                     string zipFileName = fileInfo.Name.Replace(fileInfo.Extension, FileConst.ZIP);
-                    string zipFilePath = Path.Combine(zipDirectory, zipFileName);
 
                     //将压缩文件添加到指定目录
                     if (!string.IsNullOrEmpty(targetZipDirectory))
                     {
                         PathUtitly.EnsurePhysicalPath(targetZipDirectory);
                         zipDirectory = targetZipDirectory;
-                        zipFilePath = Path.Combine(targetZipDirectory, zipFileName);
-                    }
-                    if (!string.IsNullOrEmpty(password))
-                    {
-                        zipFile.Password = password;
                     }
 
-                    zipFile.AddDirectory(zipDirectory);
-
+                    string zipFilePath = Path.Combine(zipDirectory, zipFileName);
+                    zipFile.Password = password;
                     zipFile.AddFile(filePath);
+
                     zipFile.Save(zipFilePath);
                 }
+                else
+                    throw new Exception($"压缩文件出错，找不到对应的文件{filePath}");
             }
         }
+
+        /// <summary>
+        /// 压缩文件夹
+        /// </summary>
+        /// <param name="directory"></param>
+        /// <param name="zipDirectory"></param>
+        /// <param name="password"></param>
+        /// <param name="targetZipDirectory"></param>
+        public static void CompressDirectory(string directory,string zipDirectory,string password,string targetZipDirectory = null)
+        {
+            using (ZipFile zipFile=new ZipFile (Encoding.UTF8))
+            {
+                if (Directory.Exists(directory))
+                {
+                    PathUtitly.EnsurePhysicalPath(zipDirectory);
+                    //压缩文件夹的名称
+                    string zipDirctoryName = GuidUtitly.CreateGuid() + FileConst.ZIP;
+                    zipFile.AddDirectory(directory);
+
+                    zipFile.Password = password;
+                    if (!string.IsNullOrEmpty(targetZipDirectory))
+                    {
+                        PathUtitly.EnsurePhysicalPath(targetZipDirectory);
+                        zipDirectory = targetZipDirectory;
+                    }
+                    string zipPath = Path.Combine(zipDirectory, zipDirctoryName);
+                    zipFile.Password = password;
+
+                    //保存
+                    zipFile.Save(zipPath);
+                }
+                else
+                    throw new Exception($"压缩文件出错，找不到对应的文件{directory}");
+            }
+        }
+
     }
 }
