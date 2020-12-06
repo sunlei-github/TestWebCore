@@ -48,11 +48,11 @@ namespace WebApi
             services.ConfMySqlServices(Configuration);
             services.ConfSwaggerServices(Configuration);
 
-            services.AddScoped(typeof(IRepositoryServices<>), typeof(RepositoryServices<>));
-            services.AddScoped<IAccountServices, AccountServices>();
-            services.AddScoped<IMusicServices, MusicServices>();
-            services.AddScoped<IImageServices, ImageServices>();
-            services.AddScoped<IVedioServices, VedioServices>();
+            ////services.AddScoped(typeof(IRepositoryServices<>), typeof(RepositoryServices<>));
+            ////services.AddScoped<IAccountServices, AccountServices>();
+            ////services.AddScoped<IMusicServices, MusicServices>();
+            ////services.AddScoped<IImageServices, ImageServices>();
+            ////services.AddScoped<IVedioServices, VedioServices>();
 
 
             //设置上传文件的大小为最大  否则会报错Failed to read the request form. Multipart body length limit 134217728 exceeded

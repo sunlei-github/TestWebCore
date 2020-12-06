@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 using WebApi.EntityFramework;
 using System.Linq.Expressions;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Repository.Repository
 {
     public class RepositoryServices<BaseEntity> : IRepositoryServices<BaseEntity>
         where BaseEntity : class, IEntity
     {
-        private readonly WebApiDbContext _webApiDbContext;
+        //private readonly WebApiDbContext _webApiDbContext;
+        private readonly DbContext _webApiDbContext;
 
         public RepositoryServices(WebApiDbContext webApiDbContext)
         {
