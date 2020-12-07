@@ -2,31 +2,27 @@ using Autofac;
 using log4net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApi.EntityFramework;
-using log4net.Config;
 using WebApi.MiddleWare;
 using System.IO;
 using WebApi.Moudle;
-using WebApi.Repository.Repository;
-using WebApi.IApplication.IServices.IAccount;
-using WebApi.Application.Services;
 using WebApi.Attribute;
 using WebApi.ConfigureServices;
 using Microsoft.AspNetCore.Http.Features;
-using WebApi.IApplication.IServices.IResource;
-using WebApi.Application.Resource;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Hangfire;
+using Hangfire.MySql.Core;
+using Hangfire.Dashboard;
+using WebApi.Application.HangfireTask;
+using System.Threading;
+using WebApi.IApplication.IServices.IHangefire;
 
 namespace WebApi
 {
@@ -49,6 +45,8 @@ namespace WebApi
 
             services.ConfMySqlServices(Configuration);
             services.ConfSwaggerServices(Configuration);
+            services.ConfHangfireServices(Configuration);
+
             services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
 
             //设置上传文件的大小为最大  否则会报错Failed to read the request form. Multipart body length limit 134217728 exceeded
@@ -84,6 +82,13 @@ namespace WebApi
             });
             #endregion
 
+            #region Hangefire
+            app.UseHangfireServer();   //使用hangfire服务
+            app.UseHangfireDashboard("/hangfire");
+     
+
+            #endregion
+
             app.UseAuditlog();
 
             app.UseRouting();
@@ -94,6 +99,8 @@ namespace WebApi
             {
                 endpoints.MapControllers();
             });
+
+            HangefireMiddleWare.PrepareJob();
         }
     }
 }

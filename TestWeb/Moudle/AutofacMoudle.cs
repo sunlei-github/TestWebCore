@@ -16,6 +16,8 @@ using WebApi.Application.Resource;
 using WebApi.Controllers;
 using WebApi.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Application.HangfireTask;
+using WebApi.IApplication.IServices.IHangefire;
 
 namespace WebApi.Moudle
 {
@@ -28,7 +30,7 @@ namespace WebApi.Moudle
         protected override void Load(ContainerBuilder containerBuilder)
         {
             var controllersTypesInAssembly = typeof(Startup).Assembly.GetExportedTypes()
-.Where(type => typeof(Microsoft.AspNetCore.Mvc.ControllerBase).IsAssignableFrom(type)).ToArray();
+                  .Where(type => typeof(Microsoft.AspNetCore.Mvc.ControllerBase).IsAssignableFrom(type)).ToArray();
             containerBuilder.RegisterTypes(controllersTypesInAssembly).PropertiesAutowired(); //允许控制器内属性注入 
 
             containerBuilder.RegisterType<WebApiDbContext>().As<DbContext>().InstancePerLifetimeScope();
@@ -37,6 +39,7 @@ namespace WebApi.Moudle
             containerBuilder.RegisterType<MusicServices>().As<IMusicServices>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<ImageServices>().As<IImageServices>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<VedioServices>().As<IVedioServices>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<HangefireServices>().As<IHangefireServices>().InstancePerLifetimeScope();
 
         }
     }
