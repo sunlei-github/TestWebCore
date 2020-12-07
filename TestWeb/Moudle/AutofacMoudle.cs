@@ -27,16 +27,9 @@ namespace WebApi.Moudle
         /// <param name="containerBuilder"></param>
         protected override void Load(ContainerBuilder containerBuilder)
         {
-            #region 指定控制器的服务由autofac进行注册
-            var assembly = this.GetType().GetTypeInfo().Assembly;
-            var manager = new ApplicationPartManager();
-            manager.ApplicationParts.Add(new AssemblyPart(assembly));
-            manager.FeatureProviders.Add(new ControllerFeatureProvider());
-            var feature = new ControllerFeature();
-            manager.PopulateFeature(feature);
-            containerBuilder.RegisterType<ApplicationPartManager>().AsSelf().SingleInstance();
-            containerBuilder.RegisterTypes(feature.Controllers.Select(ti => ti.AsType()).ToArray()).PropertiesAutowired();
-            #endregion
+            var controllersTypesInAssembly = typeof(Startup).Assembly.GetExportedTypes()
+.Where(type => typeof(Microsoft.AspNetCore.Mvc.ControllerBase).IsAssignableFrom(type)).ToArray();
+            containerBuilder.RegisterTypes(controllersTypesInAssembly).PropertiesAutowired(); //允许控制器内属性注入 
 
             containerBuilder.RegisterType<WebApiDbContext>().As<DbContext>().InstancePerLifetimeScope();
             containerBuilder.RegisterGeneric(typeof(RepositoryServices<>)).As(typeof(IRepositoryServices<>)).InstancePerLifetimeScope();
@@ -45,14 +38,6 @@ namespace WebApi.Moudle
             containerBuilder.RegisterType<ImageServices>().As<IImageServices>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<VedioServices>().As<IVedioServices>().InstancePerLifetimeScope();
 
-            var testBuilder = containerBuilder.Build();
-
-            //var a5 = testBuilder.Resolve(typeof(IRepositoryServices<>));
-            var a1 = testBuilder.Resolve<IAccountServices>();
-            var a2 = testBuilder.Resolve<IMusicServices>();
-            var a3 = testBuilder.Resolve<IImageServices>();
-            var a4 = testBuilder.Resolve<IVedioServices>();
-            var a6 = testBuilder.Resolve<AccountController>();
         }
     }
 }

@@ -14,37 +14,37 @@ namespace WebApi.Repository.Repository
         where BaseEntity : class, IEntity
     {
         //private readonly WebApiDbContext _webApiDbContext;
-        private readonly DbContext _webApiDbContext;
+        private readonly DbContext _dbContext;
 
-        public RepositoryServices(WebApiDbContext webApiDbContext)
+        public RepositoryServices(DbContext dbContext)
         {
-            _webApiDbContext = webApiDbContext;
+            _dbContext = dbContext;
         }
 
         public async Task<int> InsertEntity(BaseEntity entity)
         {
-            await _webApiDbContext.AddAsync<BaseEntity>(entity);
+            await _dbContext.AddAsync<BaseEntity>(entity);
 
-            return await _webApiDbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync();
         }
 
         public async Task<int> UpdateEntity(BaseEntity entity)
         {
-            _webApiDbContext.Update<BaseEntity>(entity);
+            _dbContext.Update<BaseEntity>(entity);
 
-            return await _webApiDbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync();
         }
 
         public async Task<int> DeleteEntity(BaseEntity entity)
         {
-            _webApiDbContext.Remove<BaseEntity>(entity);
+            _dbContext.Remove<BaseEntity>(entity);
 
-            return await _webApiDbContext.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync();
         }
 
         public async Task<BaseEntity> FindSingleEntity(int key)
         {
-            return await _webApiDbContext.FindAsync<BaseEntity>(key);
+            return await _dbContext.FindAsync<BaseEntity>(key);
         }
 
         public async Task<IEnumerable<BaseEntity>> QueryEntity(Expression<Func<BaseEntity, bool>> expression)
@@ -52,7 +52,7 @@ namespace WebApi.Repository.Repository
             return await Task.Run(() =>
              {
                  List<BaseEntity> entities = new List<BaseEntity>();
-                 var entityEnumerators = _webApiDbContext.Set<BaseEntity>().AsQueryable().GetEnumerator();
+                 var entityEnumerators = _dbContext.Set<BaseEntity>().AsQueryable().GetEnumerator();
                  while (entityEnumerators.MoveNext())
                  {
                      entities.Add(entityEnumerators.Current);
@@ -64,7 +64,7 @@ namespace WebApi.Repository.Repository
 
         public async Task BeginTransaction(Action transactionAction)
         {
-            using (var transaction = await _webApiDbContext.Database.BeginTransactionAsync())
+            using (var transaction = await _dbContext.Database.BeginTransactionAsync())
             {
                 try
                 {
