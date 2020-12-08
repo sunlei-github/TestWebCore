@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.Text;
 using WebApi.Core.Resut;
 using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
+using WebApi.Common.Const;
 
 namespace WebApi.Common.Utitly
 {
-    public class UploadUtitly
+    public class SourceUtitly
     {
         /// <summary>
         /// 上传文件
@@ -31,7 +34,8 @@ namespace WebApi.Common.Utitly
 
             string baseRelativePath = Path.Combine(basePath, uploadDirectoy);
             string relativeUploadPath = PathUtitly.PrepareDateUploadPath(baseRelativePath);
-            string relativeFilePath = FileUtitly.PrepareRelativeUploadFile(relativeUploadPath, file.FileName);
+            string fileExtension = Path.GetExtension(file.Name);
+            string relativeFilePath = FileUtitly.PrepareRelativeUploadFile(relativeUploadPath, fileExtension);
             string fileFullPath = FileUtitly.GetFullUploadFile(relativeFilePath);
 
             using (FileStream fileStream =new FileStream (fileFullPath, FileMode.Create,FileAccess.ReadWrite))
@@ -40,8 +44,20 @@ namespace WebApi.Common.Utitly
                 result = relativeFilePath;
             }
 
-            CompressUtitly.CompressFile(relativeFilePath, "ZipSource","1111");
-            CompressUtitly.CompressFile(fileFullPath, "ZipSource", "1111", @"D:\zip");
+            return relativeFilePath;
+        }
+
+        public static async Task<string> DownloadImage(Stream stream, string basePath, string uploadDirectoy)
+        {
+            string baseRelativePath = Path.Combine(basePath, uploadDirectoy);
+            string relativeUploadPath = PathUtitly.PrepareDateUploadPath(baseRelativePath);
+            string relativeFilePath = FileUtitly.PrepareRelativeUploadFile(relativeUploadPath, FileConst.JPG);
+            string fileFullPath = FileUtitly.GetFullUploadFile(relativeFilePath);
+
+            using (FileStream fileStream = new FileStream(fileFullPath, FileMode.Create, FileAccess.ReadWrite))
+            {
+              await stream.CopyToAsync(fileStream);
+            }
 
             return relativeFilePath;
         }

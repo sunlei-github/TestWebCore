@@ -7,5 +7,7 @@ namespace WebApi.Common.Const
     public class FileConst
     {
         public static string ZIP = ".zip";
+
+        public static string JPG = ".jpg";
     }
 }

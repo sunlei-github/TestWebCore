@@ -32,7 +32,7 @@ namespace WebApi.Application.Resource
         {
             return new UploadResourceOuput
             {
-                UplaodPath = base.UploadFile(file, _configuration["UploadDiretory"], UploadSourceConst.UPLOAD_MUSIC)
+                UplaodPath = base.UploadFile(file, _configuration["UploadDiretory"], SourceDirectoryConst.MUSIC)
             };
         }
 
@@ -40,7 +40,7 @@ namespace WebApi.Application.Resource
         {
             return new UploadResourcesOuput
             {
-                UplaodPaths = base.UploadFiles(files, _configuration["UploadDiretory"], UploadSourceConst.UPLOAD_MUSIC)
+                UplaodPaths = base.UploadFiles(files, _configuration["UploadDiretory"], SourceDirectoryConst.MUSIC)
             };
         }
 

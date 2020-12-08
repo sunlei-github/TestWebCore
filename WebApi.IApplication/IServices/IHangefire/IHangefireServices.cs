@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WebApi.IApplication.IServices.IHangefire
 {
@@ -8,5 +9,7 @@ namespace WebApi.IApplication.IServices.IHangefire
     {
         string TestJob();
 
+
+        Task DownloadImage();
     }
 }

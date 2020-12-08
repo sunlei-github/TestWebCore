@@ -10,6 +10,7 @@ using WebApi.IApplication.Dto.Account;
 using WebApi.IApplication.IServices.IAccount;
 using Wlniao;
 using Microsoft.Net.Http.Headers;
+using System.Net.Http;
 
 namespace WebApi.Controllers
 {
@@ -55,5 +56,25 @@ namespace WebApi.Controllers
             return result;
         }
 
+        [HttpGet]
+        public async Task<FileStreamResult> Show()
+        {
+
+
+            // https://acg.yanwz.cn/api.php
+
+            Stream stream = null;
+
+            using (HttpClient client=new HttpClient ())
+            {
+                HttpResponseMessage responseMsg = await client.GetAsync("https://acg.yanwz.cn/api.php");
+                if (responseMsg.IsSuccessStatusCode)
+                {
+                    stream = await responseMsg.Content.ReadAsStreamAsync();
+                }
+            }
+
+            return base.CreateFileStreamResult(stream, "test.jpg");
+        }
     }
 }

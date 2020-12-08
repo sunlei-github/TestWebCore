@@ -32,7 +32,7 @@ namespace WebApi.Application.Resource
         {
             return new UploadResourceOuput
             {
-                UplaodPath = base.UploadFile(file, _configuration["UploadDiretory"], UploadSourceConst.UPLOAD_VEDIO)
+                UplaodPath = base.UploadFile(file, _configuration["UploadDiretory"], SourceDirectoryConst.VEDIO)
             };
         }
 
@@ -40,7 +40,7 @@ namespace WebApi.Application.Resource
         {
             return new UploadResourcesOuput
             {
-                UplaodPaths = base.UploadFiles(files, _configuration["UploadDiretory"], UploadSourceConst.UPLOAD_VEDIO)
+                UplaodPaths = base.UploadFiles(files, _configuration["UploadDiretory"], SourceDirectoryConst.VEDIO)
             };
         }
 

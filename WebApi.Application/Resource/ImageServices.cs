@@ -7,9 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApi.Common.Const;
 using WebApi.Common.Utitly;
+using WebApi.Core.Entity.Resource;
 using WebApi.IApplication.Dto.Account;
 using WebApi.IApplication.Dto.Resource;
 using WebApi.IApplication.IServices.IResource;
+using WebApi.Repository.Repository;
 
 namespace WebApi.Application.Resource
 {
@@ -17,10 +19,12 @@ namespace WebApi.Application.Resource
     {
 
         private IConfiguration _configuration = null;
+        private IRepositoryServices<DbImageResource> _dbImageRepository;
 
-        public ImageServices(IConfiguration configuration)
+        public ImageServices(IConfiguration configuration, IRepositoryServices<DbImageResource> dbImageRepository)
         {
             _configuration = configuration;
+            _dbImageRepository = dbImageRepository;
         }
 
         public async Task<Stream> DownloadImage(DownResourceInput input)
@@ -32,7 +36,7 @@ namespace WebApi.Application.Resource
         {
             return new UploadResourceOuput
             {
-                UplaodPath = base.UploadFile(file, _configuration["UploadDiretory"], UploadSourceConst.UPLOAD_IMAGE)
+                UplaodPath = base.UploadFile(file, _configuration["UploadDiretory"], SourceDirectoryConst.IMAGE)
             };
         }
 
@@ -40,7 +44,7 @@ namespace WebApi.Application.Resource
         {
             return new UploadResourcesOuput
             {
-                UplaodPaths = base.UploadFiles(files, _configuration["UploadDiretory"], UploadSourceConst.UPLOAD_IMAGE)
+                UplaodPaths = base.UploadFiles(files, _configuration["UploadDiretory"], SourceDirectoryConst.IMAGE)
             };
         }
 

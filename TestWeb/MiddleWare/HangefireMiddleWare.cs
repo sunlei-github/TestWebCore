@@ -18,7 +18,7 @@ namespace WebApi.MiddleWare
         public static void PrepareJob()
         {
 
-            RecurringJob.AddOrUpdate<IHangefireServices>(Guid.NewGuid().ToString(), p => p.TestJob(), "0/30 * * * * ? ");
+            //RecurringJob.AddOrUpdate<IHangefireServices>(Guid.NewGuid().ToString(), p => p.TestJob(), "0/30 * * * * ? ");
         }
     }
 }

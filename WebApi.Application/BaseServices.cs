@@ -18,7 +18,7 @@ namespace WebApi.Application
         /// <returns></returns>
         protected virtual string UploadFile(IFormFile file,string uploadDiretory,string fileTypeName)
         {
-            return UploadUtitly.UploadFile(file, uploadDiretory, fileTypeName);
+            return SourceUtitly.UploadFile(file, uploadDiretory, fileTypeName);
         }
 
         /// <summary>

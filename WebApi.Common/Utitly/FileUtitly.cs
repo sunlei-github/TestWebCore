@@ -11,11 +11,11 @@ namespace WebApi.Common.Utitly
         /// 创建guid的文件名称
         /// </summary>
         /// <param name="DiretoryPath"></param>
-        /// <param name="fileName"></param>
+        /// <param name="fileExtension"></param>
         /// <returns></returns>
-        public static string PrepareRelativeUploadFile(string DiretoryPath,string fileName)
+        public static string PrepareRelativeUploadFile(string DiretoryPath,string fileExtension)
         {
-            string fileExtension = Path.GetExtension(fileName);
+
             string guid = GuidUtitly.CreateGuid();
             string guidFilleName = $"{guid}{fileExtension}";
             string filePath = Path.Combine(DiretoryPath, guidFilleName);
