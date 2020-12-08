@@ -38,7 +38,7 @@ namespace WebApi.Core.BaseEntity
         /// <summary>
         /// 观看次数
         /// </summary>
-        bool VisitCount { set; get; }
+        long VisitCount { set; get; }
 
         /// <summary>
         /// 资源名称

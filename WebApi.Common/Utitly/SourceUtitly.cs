@@ -47,6 +47,13 @@ namespace WebApi.Common.Utitly
             return relativeFilePath;
         }
 
+        /// <summary>
+        /// 将流里面的图片保存到本地
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="basePath"></param>
+        /// <param name="uploadDirectoy"></param>
+        /// <returns></returns>
         public static async Task<string> DownloadImage(Stream stream, string basePath, string uploadDirectoy)
         {
             string baseRelativePath = Path.Combine(basePath, uploadDirectoy);

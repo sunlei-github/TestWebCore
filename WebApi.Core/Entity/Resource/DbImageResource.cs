@@ -22,7 +22,7 @@ namespace WebApi.Core.Entity.Resource
 
         public long DownloadCount { set; get; }
 
-        public bool VisitCount { set; get; }
+        public long VisitCount { set; get; }
 
         public string Title { set; get; }
 
