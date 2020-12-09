@@ -31,6 +31,10 @@ namespace WebApi.Application.HangfireTask
             _dbImageRepository = dbImageRepository;
         }
 
+        /// <summary>
+        /// 从其他服务器获取图片同步到本地
+        /// </summary>
+        /// <returns></returns>
         public async Task DownloadImage()
         {
             var tuple = GetWebApiCartoonUrl();
@@ -41,8 +45,6 @@ namespace WebApi.Application.HangfireTask
                 _logger.LogInformation("无可用的同步图片地址");
                 return;
             }
-
-            Queue<Action> taskQueue = new Queue<Action>();
 
             //定义任务
             Action taskAction =  () =>
@@ -63,16 +65,9 @@ namespace WebApi.Application.HangfireTask
 
             for (int i = 0; i < 20; i++)
             {
-                taskQueue.Enqueue(taskAction);
+                await Task.Run(taskAction);
             }
-
-            //同步任务 
-            var result = Parallel.ForEach(taskQueue, new ParallelOptions() { MaxDegreeOfParallelism = 5 }, item =>
-             {
-                 item.Invoke();
-             });
-
-            var dd = result.IsCompleted;
+          
         }
 
         /// <summary>
