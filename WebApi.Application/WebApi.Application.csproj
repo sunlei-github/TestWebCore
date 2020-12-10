@@ -13,10 +13,8 @@
   <ItemGroup>
     <PackageReference Include="Hangfire.AspNetCore" Version="1.7.18" />
     <PackageReference Include="Hangfire.MySql.Core" Version="2.2.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ExternalWebApi\" />
+    <PackageReference Include="ServiceStack.Redis.Core" Version="5.10.2" />
+    <PackageReference Include="ServiceStack.Server.Core" Version="5.10.2" />
   </ItemGroup>
 
 </Project>

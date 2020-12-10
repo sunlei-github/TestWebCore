@@ -36,9 +36,9 @@ namespace WebApi.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public LoginInOutput LoginIn(LoginInput input)
+        public async Task<LoginInOutput> LoginIn(LoginInput input)
         {
-            var result = _accountServices.LoginIn(input);
+            var result = await _accountServices.LoginIn(input);
 
             return result;
         }
@@ -56,25 +56,5 @@ namespace WebApi.Controllers
             return result;
         }
 
-        [HttpGet]
-        public async Task<FileStreamResult> Show()
-        {
-
-
-            // https://acg.yanwz.cn/api.php
-
-            Stream stream = null;
-
-            using (HttpClient client=new HttpClient ())
-            {
-                HttpResponseMessage responseMsg = await client.GetAsync("https://acg.yanwz.cn/api.php");
-                if (responseMsg.IsSuccessStatusCode)
-                {
-                    stream = await responseMsg.Content.ReadAsStreamAsync();
-                }
-            }
-
-            return base.CreateFileStreamResult(stream, "test.jpg");
-        }
     }
 }

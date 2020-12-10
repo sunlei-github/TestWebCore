@@ -11,3 +11,5 @@ obj/
 # 忽略.vs目录
 .vs/
 
+#  忽略下载的文件目录
+DownloadDirectory/

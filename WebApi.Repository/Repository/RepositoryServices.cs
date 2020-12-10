@@ -13,7 +13,6 @@ namespace WebApi.Repository.Repository
     public class RepositoryServices<BaseEntity> : IRepositoryServices<BaseEntity>
         where BaseEntity : class, IEntity
     {
-        //private readonly WebApiDbContext _webApiDbContext;
         private readonly DbContext _dbContext;
 
         public RepositoryServices(DbContext dbContext)
@@ -45,6 +44,11 @@ namespace WebApi.Repository.Repository
         public async Task<BaseEntity> FindSingleEntity(int key)
         {
             return await _dbContext.FindAsync<BaseEntity>(key);
+        }
+
+        public async Task<List<BaseEntity>> FindAllEntity()
+        {
+            return await _dbContext.Set<BaseEntity>().ToListAsync();
         }
 
         public async Task<IEnumerable<BaseEntity>> QueryEntity(Expression<Func<BaseEntity, bool>> expression)

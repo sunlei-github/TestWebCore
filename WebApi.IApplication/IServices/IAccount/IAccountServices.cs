@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using WebApi.IApplication.Dto.Account;
 
 namespace WebApi.IApplication.IServices.IAccount
@@ -13,7 +14,7 @@ namespace WebApi.IApplication.IServices.IAccount
         /// <param name="loginInput"></param>
         /// <returns></returns>
 
-        LoginInOutput LoginIn(LoginInput input);
+        Task<LoginInOutput> LoginIn(LoginInput input);
 
         /// <summary>
         /// 登出
@@ -21,5 +22,6 @@ namespace WebApi.IApplication.IServices.IAccount
         /// <param name="input"></param>
         /// <returns></returns>
         LoginOutOutput LoginOut(LoginOutInput input);
+
     }
 }

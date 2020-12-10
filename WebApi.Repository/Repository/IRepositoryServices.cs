@@ -39,6 +39,13 @@ namespace WebApi.Repository.Repository
         Task<Entity> FindSingleEntity(int key);
 
         /// <summary>
+        /// 获取所有数据
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        Task<List<Entity>> FindAllEntity();
+
+        /// <summary>
         ///   查询实体
         /// </summary>
         /// <returns></returns>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Application.Redis;
 using WebApi.IApplication.IServices.IHangefire;
 
 namespace WebApi.Controllers
@@ -22,6 +23,13 @@ namespace WebApi.Controllers
         public async Task DownloadImage()
         {
              await _hangefireServices.DownloadImage();
+        }
+
+        [HttpGet]
+        public void TestRedis()
+        {
+            RedisStringServices redis = new RedisStringServices();
+            redis.Test();
         }
     }
 }

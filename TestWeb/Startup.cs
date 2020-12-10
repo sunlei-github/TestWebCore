@@ -1,16 +1,12 @@
 using Autofac;
-using log4net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApi.MiddleWare;
-using System.IO;
 using WebApi.Moudle;
 using WebApi.Attribute;
 using WebApi.ConfigureServices;
@@ -18,11 +14,9 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Hangfire;
-using Hangfire.MySql.Core;
-using Hangfire.Dashboard;
-using WebApi.Application.HangfireTask;
-using System.Threading;
-using WebApi.IApplication.IServices.IHangefire;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WebApi
 {
@@ -48,6 +42,24 @@ namespace WebApi
             services.ConfHangfireServices(Configuration);
 
             services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
+
+
+            //string dd = Configuration.GetSection("Jwt:Secret").Value;
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
+            //{
+            //    option.SaveToken = true;
+
+            //    option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+            //    {
+            //        ValidateIssuer = true,
+            //        ValidateAudience = true,
+            //        ValidIssuer = Configuration.GetSection("Jwt:Issure").Value,
+            //        ValidAudience = Configuration.GetSection("Jwt:Audience").Value,
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("Jwt:Secret").Value)),
+            //        ValidateIssuerSigningKey = true
+            //    };
+            //});
+
 
             //设置上传文件的大小为最大  否则会报错Failed to read the request form. Multipart body length limit 134217728 exceeded
             services.Configure<FormOptions>(option =>
@@ -85,7 +97,6 @@ namespace WebApi
             #region Hangefire
             app.UseHangfireServer();   //使用hangfire服务
             app.UseHangfireDashboard("/hangfire");
-     
 
             #endregion
 
