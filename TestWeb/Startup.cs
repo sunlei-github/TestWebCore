@@ -43,7 +43,6 @@ namespace WebApi
 
             services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
 
-
             //string dd = Configuration.GetSection("Jwt:Secret").Value;
             //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
             //{

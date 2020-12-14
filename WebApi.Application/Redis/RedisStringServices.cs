@@ -12,25 +12,6 @@ namespace WebApi.Application.Redis
             CreateRedisClient();
         }
 
-        public void Test()
-        {
-            List<string> keys = new List<string>();
-            List<string> values = new List<string>();
-            for (int i = 0; i < 10; i++)
-            {
-                keys.Add($"key{i}");
-                values.Add(Guid.NewGuid().ToString());
-            }
-
-            RedisClient.SetValue("key1", "value1");
-            RedisClient.SetAll(keys, values);
-            RedisClient.SetValueIfExists("key1", "value aaa");
-            RedisClient.SetValueIfNotExists("key2", "value bbbb");
-            RedisClient.Replace("key2", "value cccc key2");
-            var key1s = RedisClient.GetAllKeys();
-            RedisClient.RemoveAll(keys);
-        }
-
         public void SetValue(string key,string value)
         {
             RedisClient.SetValue(key, value);
@@ -54,6 +35,56 @@ namespace WebApi.Application.Redis
         public bool Replace<T>(string key, T newValue)
         {
             return RedisClient.Replace<T>(key, newValue);
+        }
+
+        public List<string> GetAllKeys()
+        {
+            return RedisClient.GetAllKeys();
+        }
+
+        public void RemoveKey(params string[] keys)
+        {
+            RedisClient.RemoveAll(keys);
+        }
+
+        public void RenameKey(string oldKey, string newKey)
+        {
+            RedisClient.RenameKey(oldKey, newKey);
+        }
+
+        public bool Set<T>(string key, T value,DateTime expiredTime)
+        {
+            return RedisClient.Set(key, value, expiredTime);
+        }
+
+        public bool SetAll<T>(Dictionary<string, string> dictionary)
+        {
+            return RedisClient.SetAll(dictionary);
+        }
+
+        public long Append(string key,string value)
+        {
+            return RedisClient.AppendToValue(key, value);
+        }
+
+        public long IncrementValue(string key)
+        {
+            return RedisClient.IncrementValue(key);
+        }
+
+        public long IncrementValueBy(string key, int count)
+        {
+            return RedisClient.IncrementValueBy(key, count);
+        }
+
+        public long DecrementValue(string key)
+        {
+            return RedisClient.DecrementValue(key);
+        }
+
+        public long DecrementValueBy(string key, int count)
+        {
+            return RedisClient.DecrementValueBy(key, count);
         }
     }
 }

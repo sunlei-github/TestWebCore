@@ -28,8 +28,18 @@ namespace WebApi.Controllers
         [HttpGet]
         public void TestRedis()
         {
-            RedisStringServices redis = new RedisStringServices();
-            redis.Test();
+            //RedisStringServices redis = new RedisStringServices();
+            //redis.Test();
+
+            //RedisHashServices redis = new RedisHashServices();
+            //redis.Test();
+
+            //RedisListServices redis = new RedisListServices();
+            //redis.Test();
+
+            //RedisSetServices redis = new RedisSetServices();
+            //redis.Test();
+
         }
     }
 }
