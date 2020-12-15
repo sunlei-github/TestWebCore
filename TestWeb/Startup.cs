@@ -17,6 +17,7 @@ using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace WebApi
 {
@@ -40,24 +41,26 @@ namespace WebApi
             services.ConfMySqlServices(Configuration);
             services.ConfSwaggerServices(Configuration);
             services.ConfHangfireServices(Configuration);
+            services.AddSession();
+            services.AddDistributedMemoryCache();   // 需要加上这个 否则在使用autofac容器之后再使用session会报错
 
             services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
 
             //string dd = Configuration.GetSection("Jwt:Secret").Value;
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
-            //{
-            //    option.SaveToken = true;
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
+            {
+                option.SaveToken = true;
 
-            //    option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-            //    {
-            //        ValidateIssuer = true,
-            //        ValidateAudience = true,
-            //        ValidIssuer = Configuration.GetSection("Jwt:Issure").Value,
-            //        ValidAudience = Configuration.GetSection("Jwt:Audience").Value,
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("Jwt:Secret").Value)),
-            //        ValidateIssuerSigningKey = true
-            //    };
-            //});
+                option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = Configuration.GetSection("Jwt:Issure").Value,
+                    ValidAudience = Configuration.GetSection("Jwt:Audience").Value,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("Jwt:Secret").Value)),
+                    ValidateIssuerSigningKey = true
+                };
+            });
 
 
             //设置上传文件的大小为最大  否则会报错Failed to read the request form. Multipart body length limit 134217728 exceeded
@@ -96,14 +99,13 @@ namespace WebApi
             #region Hangefire
             app.UseHangfireServer();   //使用hangfire服务
             app.UseHangfireDashboard("/hangfire");
-
             #endregion
 
             app.UseAuditlog();
-
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

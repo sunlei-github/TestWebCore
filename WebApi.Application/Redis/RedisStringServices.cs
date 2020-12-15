@@ -57,9 +57,9 @@ namespace WebApi.Application.Redis
             return RedisClient.Set(key, value, expiredTime);
         }
 
-        public bool SetAll<T>(Dictionary<string, string> dictionary)
+        public void SetAll<T>(Dictionary<string, string> dictionary)
         {
-            return RedisClient.SetAll(dictionary);
+            RedisClient.SetAll(dictionary);
         }
 
         public long Append(string key,string value)

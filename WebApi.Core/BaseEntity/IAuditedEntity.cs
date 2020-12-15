@@ -16,15 +16,5 @@ namespace WebApi.Core.BaseEntity
         /// </summary>
         DateTime? CreateTime { set; get; }
 
-        /// <summary>
-        /// 最后更新人Id
-        /// </summary>
-        int? LastModifierUserId { set; get; }
-
-        /// <summary>
-        /// 最后更新时间
-        /// </summary>
-        DateTime LastModifionTime { set; get; }
-
     }
 }

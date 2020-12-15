@@ -39,7 +39,7 @@ namespace WebApi.IApplication.Dto.Account
         /// <summary>
         /// 登陆的错误信息
         /// </summary>
-        public string ErrorMessage { set; get; }
+        public string Result { set; get; }
 
     }
 

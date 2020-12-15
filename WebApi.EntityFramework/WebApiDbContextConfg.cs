@@ -22,7 +22,7 @@ namespace WebApi.EntityFramework
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=47.98.50.115;port=3306;database=WebCore;uid=root;password=123456;Charset=utf8;Convert Zero Datetime=True ;Allow Zero Datetime=True;");
+                optionsBuilder.UseMySql("server=47.98.50.115;port=3306;database=WebCoreDb;uid=root;password=123456;Charset=utf8;Convert Zero Datetime=True ;Allow Zero Datetime=True;Allow User Variables=True;");
             }
         }
 

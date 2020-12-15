@@ -123,9 +123,9 @@ namespace WebApi.Application.Redis
             return RedisClient.StoreUnionFromSortedSets(newkey, keys);
         }
 
-        public long StoreDifferencesFromSet(string intoKey,string fromKey, string[] keys)
+        public void StoreDifferencesFromSet(string intoKey,string fromKey, string[] keys)
         {
-            return RedisClient.StoreDifferencesFromSet(intoKey, fromKey, keys);
+            RedisClient.StoreDifferencesFromSet(intoKey, fromKey, keys);
         }
     }
 }

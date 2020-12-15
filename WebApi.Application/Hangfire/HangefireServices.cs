@@ -86,7 +86,6 @@ namespace WebApi.Application.HangfireTask
                 CreateTime = DateTime.Now,
                 ImageGroup = imageGroup,
                 IsShared = true,
-                LastModifionTime = DateTime.Now,
                 ResourceLocation = result,
                 VisitCount = 0,
                 ResourceSize = stream?.Length ?? 0

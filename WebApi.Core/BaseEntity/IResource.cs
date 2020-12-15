@@ -8,7 +8,7 @@ namespace WebApi.Core.BaseEntity
     /// <summary>
     /// 资源接口
     /// </summary>
-    public interface IResource: IFullAuditedEntity
+    public interface IResource: IAuditedEntity
     {
         /// <summary>
         /// 资源大小

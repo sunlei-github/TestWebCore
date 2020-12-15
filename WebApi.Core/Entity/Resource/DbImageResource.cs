@@ -33,17 +33,9 @@ namespace WebApi.Core.Entity.Resource
         /// </summary>
         public ImageGroupEnum ImageGroup { set; get; }
 
-        public string CreatorName { set; get; }
-
-        public string LastModifierUserName { set; get; }
-
         public int CreatorUserId { set; get; }
 
         public DateTime? CreateTime { set; get; }
-
-        public int? LastModifierUserId { set; get; }
-
-        public DateTime LastModifionTime { set; get; }
 
         public int Id { set; get; }
 

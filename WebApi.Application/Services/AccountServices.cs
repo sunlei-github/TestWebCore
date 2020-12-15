@@ -1,7 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WebApi.Common.Utitly;
@@ -15,13 +21,18 @@ namespace WebApi.Application.Services
 {
     public class AccountServices : BaseServices, IAccountServices
     {
-        private IRepositoryServices<DbAccountUser>  _accountUserRepository = null;
+        private IRepositoryServices<DbAccountUser> _accountUserRepository = null;
         private IConfiguration _configuration = null;
+        private IRepositoryServices<DbUser> _userRepository = null;
+        private IHttpContextAccessor _httpContextAccessor = null;
 
-        public AccountServices(IRepositoryServices<DbAccountUser> accountUserRepository, IConfiguration configuration)
+        public AccountServices(IRepositoryServices<DbAccountUser> accountUserRepository, IConfiguration configuration,
+            IRepositoryServices<DbUser> userRepository, IHttpContextAccessor httpContextAccessor)
         {
             _accountUserRepository = accountUserRepository;
             _configuration = configuration;
+            _userRepository = userRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<LoginInOutput> LoginIn(LoginInput input)
@@ -32,23 +43,29 @@ namespace WebApi.Application.Services
             {
                 return new LoginInOutput
                 {
-                    ErrorMessage = "用户名错误"
+                    Result = "用户名错误"
                 };
             }
 
-            string pwdMd5 = EncryptUtitly.CreateMD5Encrypt(input.UserName);
-            if (loginUser.Password != loginUser.Password)
+            string pwdMd5 = EncryptUtitly.CreateMD5Encrypt(input.Password);
+            if (pwdMd5 != loginUser.Password)
             {
                 return new LoginInOutput
                 {
-                    ErrorMessage = "密码错误"
+                    Result = "密码错误"
                 };
             }
+
+            string token = CreateJwtSecretKey(loginUser.UserName);
+
+            var currentUser = await _userRepository.FindSingleEntity(loginUser.Id);
+            string userStr = JsonConvert.SerializeObject(currentUser, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            _httpContextAccessor.HttpContext.Session.SetString(loginUser.DbUser.Id.ToString(), userStr);
 
             return new LoginInOutput
             {
                 AccountSatus = Core.Enum.User.AccountSatusEnum.Disabled,
-                ErrorMessage = "禁用的用户不能登陆"
+                Result = token
             };
         }
 
@@ -60,5 +77,31 @@ namespace WebApi.Application.Services
             };
         }
 
+        /// <summary>
+        /// 创建Jwt Token
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        private string CreateJwtSecretKey(string username)
+        {
+            Claim[] claims = new Claim[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub,username),                                           // 用户名
+                new Claim(JwtRegisteredClaimNames.Iat,DateTime.UtcNow.ToString()),               // token 生效时间
+            };
+
+            string jwtScrect = _configuration.GetSection("Jwt:Secret").Value;
+            var authSingingKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtScrect));
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration.GetSection("Jwt: Issure").Value,
+                audience: _configuration.GetSection("Jwt:Audience").Value,
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(authSingingKey, SecurityAlgorithms.HmacSha256)
+                );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApi.EntityFramework.Migrations
 {
-    public partial class InitDataBase : Migration
+    public partial class InitTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,6 +23,26 @@ namespace WebApi.EntityFramework.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DbAccountUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DbAuditLogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Userid = table.Column<string>(nullable: true),
+                    ServiceName = table.Column<string>(nullable: true),
+                    RequestMethod = table.Column<string>(nullable: true),
+                    Parameters = table.Column<string>(nullable: true),
+                    ReturnValue = table.Column<string>(nullable: true),
+                    RequestTime = table.Column<DateTime>(nullable: false),
+                    ClientAdress = table.Column<string>(nullable: true),
+                    Expection = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DbAuditLogs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,15 +112,11 @@ namespace WebApi.EntityFramework.Migrations
                     CanDownloaded = table.Column<bool>(nullable: false),
                     IsShared = table.Column<bool>(nullable: false),
                     DownloadCount = table.Column<long>(nullable: false),
-                    VisitCount = table.Column<bool>(nullable: false),
+                    VisitCount = table.Column<long>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     ImageGroup = table.Column<int>(nullable: false),
-                    CreatorName = table.Column<string>(nullable: true),
-                    LastModifierUserName = table.Column<string>(nullable: true),
                     CreatorUserId = table.Column<int>(nullable: false),
                     CreateTime = table.Column<DateTime>(nullable: true),
-                    LastModifierUserId = table.Column<int>(nullable: true),
-                    LastModifionTime = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedTime = table.Column<DateTime>(nullable: true),
                     Description = table.Column<string>(nullable: true),
@@ -128,16 +144,12 @@ namespace WebApi.EntityFramework.Migrations
                     CanDownloaded = table.Column<bool>(nullable: false),
                     IsShared = table.Column<bool>(nullable: false),
                     DownloadCount = table.Column<long>(nullable: false),
-                    VisitCount = table.Column<bool>(nullable: false),
+                    VisitCount = table.Column<long>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     DbUserId = table.Column<int>(nullable: false),
                     MusicGroup = table.Column<int>(nullable: false),
-                    CreatorName = table.Column<string>(nullable: true),
-                    LastModifierUserName = table.Column<string>(nullable: true),
                     CreatorUserId = table.Column<int>(nullable: false),
                     CreateTime = table.Column<DateTime>(nullable: true),
-                    LastModifierUserId = table.Column<int>(nullable: true),
-                    LastModifionTime = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedTime = table.Column<DateTime>(nullable: true),
                     Description = table.Column<string>(nullable: true)
@@ -164,16 +176,12 @@ namespace WebApi.EntityFramework.Migrations
                     CanDownloaded = table.Column<bool>(nullable: false),
                     IsShared = table.Column<bool>(nullable: false),
                     DownloadCount = table.Column<long>(nullable: false),
-                    VisitCount = table.Column<bool>(nullable: false),
+                    VisitCount = table.Column<long>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     DbUserId = table.Column<int>(nullable: false),
                     VedioGroup = table.Column<int>(nullable: false),
-                    CreatorName = table.Column<string>(nullable: true),
-                    LastModifierUserName = table.Column<string>(nullable: true),
                     CreatorUserId = table.Column<int>(nullable: false),
                     CreateTime = table.Column<DateTime>(nullable: true),
-                    LastModifierUserId = table.Column<int>(nullable: true),
-                    LastModifionTime = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedTime = table.Column<DateTime>(nullable: true),
                     Description = table.Column<string>(nullable: true)
@@ -439,6 +447,9 @@ namespace WebApi.EntityFramework.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DbAuditLogs");
+
             migrationBuilder.DropTable(
                 name: "DbHotImageReSourceUsers");
 

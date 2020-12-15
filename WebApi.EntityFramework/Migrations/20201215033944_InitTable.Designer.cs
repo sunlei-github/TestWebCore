@@ -9,14 +9,14 @@ using WebApi.EntityFramework;
 namespace WebApi.EntityFramework.Migrations
 {
     [DbContext(typeof(WebApiDbContext))]
-    [Migration("20201201090055_InitDataBase")]
-    partial class InitDataBase
+    [Migration("20201215033944_InitTable")]
+    partial class InitTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("WebApi.Core.Entity.HotResource.DbHotImageResource", b =>
@@ -242,9 +242,6 @@ namespace WebApi.EntityFramework.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("CreatorName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<int>("CreatorUserId")
                         .HasColumnType("int");
 
@@ -269,15 +266,6 @@ namespace WebApi.EntityFramework.Migrations
                     b.Property<bool>("IsShared")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("LastModifierUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastModifierUserName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("LastModifionTime")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("ResourceLocation")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -287,8 +275,8 @@ namespace WebApi.EntityFramework.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("VisitCount")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<long>("VisitCount")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -311,9 +299,6 @@ namespace WebApi.EntityFramework.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("CreatorName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<int>("CreatorUserId")
                         .HasColumnType("int");
 
@@ -335,15 +320,6 @@ namespace WebApi.EntityFramework.Migrations
                     b.Property<bool>("IsShared")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("LastModifierUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastModifierUserName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("LastModifionTime")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<int>("MusicGroup")
                         .HasColumnType("int");
 
@@ -356,8 +332,8 @@ namespace WebApi.EntityFramework.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("VisitCount")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<long>("VisitCount")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -380,9 +356,6 @@ namespace WebApi.EntityFramework.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("CreatorName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<int>("CreatorUserId")
                         .HasColumnType("int");
 
@@ -404,15 +377,6 @@ namespace WebApi.EntityFramework.Migrations
                     b.Property<bool>("IsShared")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("LastModifierUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastModifierUserName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("LastModifionTime")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("ResourceLocation")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -425,8 +389,8 @@ namespace WebApi.EntityFramework.Migrations
                     b.Property<int>("VedioGroup")
                         .HasColumnType("int");
 
-                    b.Property<bool>("VisitCount")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<long>("VisitCount")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -435,6 +399,41 @@ namespace WebApi.EntityFramework.Migrations
                     b.HasIndex("Title");
 
                     b.ToTable("DbVedioResources");
+                });
+
+            modelBuilder.Entity("WebApi.Core.Entity.SystemLog.DbAuditLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClientAdress")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Expection")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Parameters")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("RequestMethod")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("RequestTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ReturnValue")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("ServiceName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Userid")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DbAuditLogs");
                 });
 
             modelBuilder.Entity("WebApi.Core.Entity.User.DbAccountUser", b =>

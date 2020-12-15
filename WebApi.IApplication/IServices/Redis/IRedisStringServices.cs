@@ -86,7 +86,7 @@ namespace WebApi.IApplication.IServices.Redis
         /// <typeparam name="T"></typeparam>
         /// <param name="dictionary"></param>
         /// <returns></returns>
-        bool SetAll<T>(Dictionary<string, string> dictionary);
+        void SetAll<T>(Dictionary<string, string> dictionary);
 
         /// <summary>
         /// 向key 追加值

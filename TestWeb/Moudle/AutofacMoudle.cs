@@ -15,6 +15,9 @@ using WebApi.IApplication.IServices.IHangefire;
 using WebApi.Repository.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using WebApi.Application;
+using Microsoft.AspNetCore.Session;
 
 namespace WebApi.Moudle
 {
@@ -35,6 +38,7 @@ namespace WebApi.Moudle
 
             containerBuilder.RegisterType<WebApiDbContext>().As<DbContext>().InstancePerLifetimeScope();
             containerBuilder.RegisterGeneric(typeof(RepositoryServices<>)).As(typeof(IRepositoryServices<>)).InstancePerLifetimeScope();
+            containerBuilder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().InstancePerLifetimeScope();
             //containerBuilder.RegisterType(typeof(ConfigurationRoot)).As(typeof(IConfiguration)).InstancePerLifetimeScope();
             //containerBuilder.RegisterGeneric(typeof(ILogger<>)).As(typeof(Logger<>)).InstancePerLifetimeScope();
 
@@ -68,9 +72,7 @@ namespace WebApi.Moudle
             //var cac = dd.Resolve<IVedioServices>();
             //var cdc = dd.Resolve<IHangefireServices>(); 
             #endregion
-
-
-            containerBuilder.RegisterType<AccountServices>().As<IAccountServices>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<AccountServices>().As<IAccountServices>().InstancePerLifetimeScope().PropertiesAutowired();
             containerBuilder.RegisterType<MusicServices>().As<IMusicServices>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<ImageServices>().As<IImageServices>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<VedioServices>().As<IVedioServices>().InstancePerLifetimeScope();

@@ -15,23 +15,26 @@ namespace WebApi.MiddleWare
     /// </summary>
     public static class AuditlogMiddleWare
     {
-        public static IApplicationBuilder UseAuditlog(this IApplicationBuilder builder/*, IRepositoryServices<DbAuditLog> repositoryServices*/)
+        public static IApplicationBuilder UseAuditlog(this IApplicationBuilder builder)
         {
             return builder.Use(async (context, next) =>
             {
-                await next();
-
                 var request = context.Request;
-                var response = context.Response;
                 DbAuditLog dbAuditLog = new DbAuditLog()
                 {
                     ClientAdress = request.Host.Value,
-                   ServiceName=request.Path,
-                   RequestMethod=request.Method,
-                   RequestTime=DateTime.Now
+                    ServiceName = request.Path,
+                    RequestMethod = request.Method,
+                    RequestTime = DateTime.Now,
                 };
+                await next();
 
-                //await repositoryServices.InsertEntity(dbAuditLog);
+                var response = context.Response;
+                using (WebApiDbContext dbContext = new WebApiDbContext())
+                {
+                    await dbContext.DbAuditLogs.AddAsync(dbAuditLog);
+                    var dd = await dbContext.SaveChangesAsync();
+                }
             });
         }
     }

@@ -195,7 +195,7 @@ namespace WebApi.IApplication.IServices.Redis
         /// <param name="fromKey"></param>
         /// <param name="keys"></param>
         /// <returns></returns>
-        long StoreDifferencesFromSet(string intoKey, string fromKey, string[] keys);
+        void StoreDifferencesFromSet(string intoKey, string fromKey, string[] keys);
   
 
     }

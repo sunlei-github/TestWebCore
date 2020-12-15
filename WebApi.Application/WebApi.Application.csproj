@@ -15,6 +15,7 @@
     <PackageReference Include="Hangfire.MySql.Core" Version="2.2.5" />
     <PackageReference Include="ServiceStack.Redis.Core" Version="5.10.2" />
     <PackageReference Include="ServiceStack.Server.Core" Version="5.10.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
 </Project>
