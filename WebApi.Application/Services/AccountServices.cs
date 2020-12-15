@@ -69,6 +69,11 @@ namespace WebApi.Application.Services
             };
         }
 
+        /// <summary>
+        /// 登出  清除session  将token拉入黑名单 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public LoginOutOutput LoginOut(LoginOutInput input)
         {
             return new LoginOutOutput

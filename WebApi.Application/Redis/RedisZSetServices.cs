@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WebApi.IApplication.IServices.Redis;
+using WebApi.IApplication.IServices.IRedis;
 
 namespace WebApi.Application.Redis
 {
     public class RedisZSetServices : RedisBaseServices, IRedisZSetServices
     {
 
-        public RedisZSetServices()
-        {
-            CreateRedisClient();
-        }
+        public RedisZSetServices() : base() { }
 
-        public bool AddValue(string key,string value,double score)
+        public bool AddValue(string key, string value, double score)
         {
             return RedisClient.AddItemToSortedSet(key, value, score);
         }
@@ -38,7 +35,7 @@ namespace WebApi.Application.Redis
             return RedisClient.GetAllWithScoresFromSortedSet(key);
         }
 
-        public long GetValueIndexInSortedSet(string key,string value)
+        public long GetValueIndexInSortedSet(string key, string value)
         {
             return RedisClient.GetItemIndexInSortedSet(key, value);
         }
@@ -48,7 +45,7 @@ namespace WebApi.Application.Redis
             return RedisClient.GetItemIndexInSortedSetDesc(key, value);
         }
 
-        public double GetValueScoreInScoreSet(string key,string value)
+        public double GetValueScoreInScoreSet(string key, string value)
         {
             return RedisClient.GetItemScoreInSortedSet(key, value);
         }
@@ -123,7 +120,7 @@ namespace WebApi.Application.Redis
             return RedisClient.StoreUnionFromSortedSets(newkey, keys);
         }
 
-        public void StoreDifferencesFromSet(string intoKey,string fromKey, string[] keys)
+        public void StoreDifferencesFromSet(string intoKey, string fromKey, string[] keys)
         {
             RedisClient.StoreDifferencesFromSet(intoKey, fromKey, keys);
         }

@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WebApi.IApplication.IServices.Redis;
+using WebApi.IApplication.IServices.IRedis;
 
 namespace WebApi.Application.Redis
 {
     public class RedisSetServices : RedisBaseServices, IRedisSetServices
     {
 
-        public RedisSetServices()
-        {
-            CreateRedisClient();
-        }
+        public RedisSetServices() : base() { }
 
-        public void AddValue(string key,string value)
+        public void AddValue(string key, string value)
         {
             RedisClient.AddItemToSet(key, value);
         }
@@ -43,7 +40,7 @@ namespace WebApi.Application.Redis
             RedisClient.RemoveItemFromSet(key, value);
         }
 
-        public void MoveBetweenSets(string fromKey,string toKey,string value)
+        public void MoveBetweenSets(string fromKey, string toKey, string value)
         {
             RedisClient.MoveBetweenSets(fromKey, toKey, value);
         }
@@ -58,7 +55,7 @@ namespace WebApi.Application.Redis
             return RedisClient.GetIntersectFromSets(keys);
         }
 
-        public HashSet<string> GetDifferencesFromSet(string fromKey,params string[] keys)
+        public HashSet<string> GetDifferencesFromSet(string fromKey, params string[] keys)
         {
             return RedisClient.GetDifferencesFromSet(fromKey, keys);
         }
@@ -67,7 +64,7 @@ namespace WebApi.Application.Redis
         {
             RedisClient.StoreUnionFromSets(intoKey, keys);
         }
-        public void StoreDifferencesFromSet(string fromKey,string intoKey, params string[] keys)
+        public void StoreDifferencesFromSet(string fromKey, string intoKey, params string[] keys)
         {
             RedisClient.StoreDifferencesFromSet(fromKey, intoKey, keys);
         }

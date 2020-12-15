@@ -1,29 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WebApi.IApplication.IServices.Redis;
+using WebApi.IApplication.IServices.IRedis;
 
 namespace WebApi.Application.Redis
 {
-    public class RedisListServices : RedisBaseServices,IRedisListServices
+    public class RedisListServices : RedisBaseServices, IRedisListServices
     {
-        public RedisListServices()
-        {
-            CreateRedisClient();
-        }
+        public RedisListServices() : base() { }
 
-        public void AddItemBeforeList(string key,string value)
+        public void AddItemBeforeList(string key, string value)
         {
             //RedisClient.PushItemToList(key, value);
             RedisClient.PrependItemToList(key, value);
         }
 
-        public void AddItemsBeforeList(string key,List<string> values)
+        public void AddItemsBeforeList(string key, List<string> values)
         {
             RedisClient.PrependRangeToList(key, values);
         }
 
-        public void AddItemAfterList(string key,string value)
+        public void AddItemAfterList(string key, string value)
         {
             RedisClient.AddItemToList(key, value);
         }
@@ -60,14 +57,14 @@ namespace WebApi.Application.Redis
             return RedisClient.GetRangeFromList(key, startingFrom, endingAt);
         }
 
-        public void TrimList(string key , int keepStartingFrom, int keepEndingAt)
+        public void TrimList(string key, int keepStartingFrom, int keepEndingAt)
         {
             RedisClient.TrimList(key, keepStartingFrom, keepEndingAt);
         }
 
-        public string PopAndPushItemBetweenLists(string fromKey,string toKey)
+        public string PopAndPushItemBetweenLists(string fromKey, string toKey)
         {
-         return   RedisClient.PopAndPushItemBetweenLists(fromKey, toKey);
+            return RedisClient.PopAndPushItemBetweenLists(fromKey, toKey);
         }
     }
 }

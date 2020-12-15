@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WebApi.IApplication.IServices.Redis;
+using WebApi.IApplication.IServices.IRedis;
 
 namespace WebApi.Application.Redis
 {
     public class RedisStringServices : RedisBaseServices, IRedisStringServices
     {
-        public RedisStringServices()
-        {
-            CreateRedisClient();
-        }
+        public RedisStringServices() : base() { }
 
-        public void SetValue(string key,string value)
+        public void SetValue(string key, string value)
         {
             RedisClient.SetValue(key, value);
         }
@@ -22,7 +19,7 @@ namespace WebApi.Application.Redis
             RedisClient.SetAll(keys, values);
         }
 
-        public bool SetValueIfExists(string key,string value)
+        public bool SetValueIfExists(string key, string value)
         {
             return RedisClient.SetValueIfExists(key, value);
         }
@@ -52,7 +49,7 @@ namespace WebApi.Application.Redis
             RedisClient.RenameKey(oldKey, newKey);
         }
 
-        public bool Set<T>(string key, T value,DateTime expiredTime)
+        public bool Set<T>(string key, T value, DateTime expiredTime)
         {
             return RedisClient.Set(key, value, expiredTime);
         }
@@ -62,7 +59,7 @@ namespace WebApi.Application.Redis
             RedisClient.SetAll(dictionary);
         }
 
-        public long Append(string key,string value)
+        public long Append(string key, string value)
         {
             return RedisClient.AppendToValue(key, value);
         }

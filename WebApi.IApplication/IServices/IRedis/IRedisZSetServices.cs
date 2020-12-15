@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebApi.IApplication.IServices.Redis
+namespace WebApi.IApplication.IServices.IRedis
 {
     /// <summary>
     /// zset  

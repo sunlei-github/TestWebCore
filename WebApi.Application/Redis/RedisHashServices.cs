@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WebApi.IApplication.IServices.Redis;
+using WebApi.IApplication.IServices.IRedis;
 
 namespace WebApi.Application.Redis
 {
     public class RedisHashServices : RedisBaseServices, IRedisHashServices
     {
-        public RedisHashServices()
-        {
-            CreateRedisClient();
-        }
+        public RedisHashServices() : base() { }
 
         public bool SetValueInHash(string hashId, string key, string value)
         {

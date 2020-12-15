@@ -28,7 +28,7 @@ namespace WebApi.Application
         /// <param name="uploadDiretory"></param>
         /// <param name="fileTypeName"></param>
         /// <returns></returns>
-        public virtual List<string> UploadFiles(List<IFormFile> files, string uploadDiretory, string fileTypeName)
+        protected virtual List<string> UploadFiles(List<IFormFile> files, string uploadDiretory, string fileTypeName)
         {
             List<string> results = new List<string>();
 
@@ -42,5 +42,13 @@ namespace WebApi.Application
             return results;
         }
 
+        /// <summary>
+        /// 创建Redis的key 
+        /// </summary>
+        /// <returns></returns>
+        protected string CreateUserRedisKey()
+        {
+            return "CurerentUserKey";
+        }
     }
 }

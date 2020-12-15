@@ -18,6 +18,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using WebApi.Application;
 using Microsoft.AspNetCore.Session;
+using WebApi.Application.Redis;
+using WebApi.IApplication.IServices.IRedis;
 
 namespace WebApi.Moudle
 {
@@ -77,6 +79,12 @@ namespace WebApi.Moudle
             containerBuilder.RegisterType<ImageServices>().As<IImageServices>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<VedioServices>().As<IVedioServices>().InstancePerLifetimeScope();
             containerBuilder.RegisterType<HangefireServices>().As<IHangefireServices>().InstancePerLifetimeScope();
+
+            containerBuilder.RegisterType<RedisHashServices>().As<IRedisHashServices>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<RedisListServices>().As<IRedisListServices>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<RedisSetServices>().As<IRedisSetServices>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<RedisStringServices>().As<IRedisStringServices>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<RedisZSetServices>().As<IRedisZSetServices>().InstancePerLifetimeScope();
 
         }
     }
