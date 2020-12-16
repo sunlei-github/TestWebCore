@@ -132,7 +132,7 @@ namespace WebApi.Application.Services
                 signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(authSingingKey, SecurityAlgorithms.HmacSha256)
                 );
 
-            await _httpContextAccessor.HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+            //await _httpContextAccessor.HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

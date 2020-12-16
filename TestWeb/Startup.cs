@@ -46,7 +46,6 @@ namespace WebApi
 
             services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
 
-            //string dd = Configuration.GetSection("Jwt:Secret").Value;
             services.AddAuthentication(option =>
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -120,10 +119,10 @@ namespace WebApi
             //app.UseHangfireDashboard("/hangfire");
             #endregion
 
-            app.UseAuthentication();
             app.UseAuditlog();
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
 
