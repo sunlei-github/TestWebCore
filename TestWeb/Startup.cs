@@ -40,17 +40,21 @@ namespace WebApi
 
             services.ConfMySqlServices(Configuration);
             services.ConfSwaggerServices(Configuration);
-            services.ConfHangfireServices(Configuration);
+            //services.ConfHangfireServices(Configuration);
             services.AddSession();
             services.AddDistributedMemoryCache();   // 需要加上这个 否则在使用autofac容器之后再使用session会报错
 
             services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
 
             //string dd = Configuration.GetSection("Jwt:Secret").Value;
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(option =>
             {
                 option.SaveToken = true;
-
                 option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -60,6 +64,21 @@ namespace WebApi
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("Jwt:Secret").Value)),
                     ValidateIssuerSigningKey = true
                 };
+
+                option.Events = new JwtBearerEvents
+                {
+                    //如果token  过期
+                    OnAuthenticationFailed = context =>
+                    {
+                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                        {
+                            context.Response.Headers.Add("Token-Expired", "true");
+                        }
+
+                        return Task.CompletedTask;
+                    }
+                };
+
             });
 
 
@@ -97,10 +116,11 @@ namespace WebApi
             #endregion
 
             #region Hangefire
-            app.UseHangfireServer();   //使用hangfire服务
-            app.UseHangfireDashboard("/hangfire");
+            //app.UseHangfireServer();   //使用hangfire服务
+            //app.UseHangfireDashboard("/hangfire");
             #endregion
 
+            app.UseAuthentication();
             app.UseAuditlog();
             app.UseRouting();
 

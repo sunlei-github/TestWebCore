@@ -17,6 +17,8 @@ using WebApi.IApplication.Dto.Account;
 using WebApi.IApplication.IServices.IAccount;
 using WebApi.IApplication.IServices.IRedis;
 using WebApi.Repository.Repository;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace WebApi.Application.Services
 {
@@ -59,7 +61,7 @@ namespace WebApi.Application.Services
                 };
             }
 
-            string token = CreateJwtSecretKey(loginUser.UserName);
+            string token = await CreateJwtSecretKey(loginUser.UserName);
 
             var currentUser = await _userRepository.FindSingleEntity(loginUser.Id);
             string userStr = JsonConvert.SerializeObject(currentUser, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
@@ -109,13 +111,15 @@ namespace WebApi.Application.Services
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        private string CreateJwtSecretKey(string username)
+        private async Task<string> CreateJwtSecretKey(string username)
         {
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(JwtBearerDefaults.AuthenticationScheme);
             Claim[] claims = new Claim[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub,username),                                           // 用户名
                 new Claim(JwtRegisteredClaimNames.Iat,DateTime.UtcNow.ToString()),               // token 生效时间
             };
+            claimsIdentity.AddClaims(claims);
 
             string jwtScrect = _configuration.GetSection("Jwt:Secret").Value;
             var authSingingKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtScrect));
@@ -127,6 +131,8 @@ namespace WebApi.Application.Services
                 expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(authSingingKey, SecurityAlgorithms.HmacSha256)
                 );
+
+            await _httpContextAccessor.HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
