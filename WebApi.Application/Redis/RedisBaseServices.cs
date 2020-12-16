@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using WebApi.IApplication.IServices.IResource;
-using WebApi.IApplication.IServices.Redis;
+using WebApi.IApplication.IServices.IRedis;
 using ServiceStack.Redis;
 
 namespace WebApi.Application.Redis

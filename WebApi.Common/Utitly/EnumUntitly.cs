@@ -16,7 +16,8 @@ namespace WebApi.Common.Utitly
         /// <returns></returns>
         public static string GetEnumDirection(Enum singleEnum)
         {
-            var obj = singleEnum.GetType().GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault();
+            var enumFiled = singleEnum.GetType().GetField(singleEnum.ToString());
+            var obj = enumFiled.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault();
 
             if (obj == null)
             {
@@ -27,5 +28,32 @@ namespace WebApi.Common.Utitly
 
             return directionAttribute.Description;
         }
+
+        /// <summary>
+        /// 获取枚举的描述值字典
+        /// </summary>
+        /// <param name="singleEnum"></param>
+        /// <returns></returns>
+        public static Dictionary<string,string> GetEnumArrayDirection(Type enumType)
+        {
+            var enumFileds = enumType.GetFields();
+            Dictionary<string, string> enumDictionary = new Dictionary<string, string>();
+
+            foreach (var enumFiled in enumFileds)
+            {
+                var obj = enumFiled.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault();
+                if (obj == null)
+                {
+                    continue;
+                }
+
+                var directionAttribute = obj as DescriptionAttribute;
+
+                enumDictionary.Add(enumFiled.Name, directionAttribute.Description);
+            }
+
+            return enumDictionary;
+        }
+
     }
 }

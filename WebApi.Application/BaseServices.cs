@@ -43,12 +43,12 @@ namespace WebApi.Application
         }
 
         /// <summary>
-        /// 创建Redis的key 
+        /// 创建登陆用户对应的Redis的 key  key组成  CurerentUser_+{userId}
         /// </summary>
         /// <returns></returns>
-        protected string CreateUserRedisKey()
+        protected string CreateCurentUserRedisKey(int  userId)
         {
-            return "CurerentUserKey";
+            return $"CurerentUser_{userId}";
         }
     }
 }

@@ -15,6 +15,7 @@ using WebApi.Core.Entity.User;
 using WebApi.EntityFramework;
 using WebApi.IApplication.Dto.Account;
 using WebApi.IApplication.IServices.IAccount;
+using WebApi.IApplication.IServices.IRedis;
 using WebApi.Repository.Repository;
 
 namespace WebApi.Application.Services
@@ -25,14 +26,16 @@ namespace WebApi.Application.Services
         private IConfiguration _configuration = null;
         private IRepositoryServices<DbUser> _userRepository = null;
         private IHttpContextAccessor _httpContextAccessor = null;
+        private IRedisListServices _redisListServices = null;
 
         public AccountServices(IRepositoryServices<DbAccountUser> accountUserRepository, IConfiguration configuration,
-            IRepositoryServices<DbUser> userRepository, IHttpContextAccessor httpContextAccessor)
+            IRepositoryServices<DbUser> userRepository, IHttpContextAccessor httpContextAccessor, IRedisListServices redisListServices)
         {
             _accountUserRepository = accountUserRepository;
             _configuration = configuration;
             _userRepository = userRepository;
             _httpContextAccessor = httpContextAccessor;
+            _redisListServices = redisListServices;
         }
 
         public async Task<LoginInOutput> LoginIn(LoginInput input)
@@ -76,9 +79,28 @@ namespace WebApi.Application.Services
         /// <returns></returns>
         public LoginOutOutput LoginOut(LoginOutInput input)
         {
+            var sessions = _httpContextAccessor.HttpContext.Session;
+
+            if (sessions.Keys.Contains(input.UserId.ToString()))
+            {
+                sessions.Remove(input.UserId.ToString());
+                string headerAuth = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+                if (!string.IsNullOrEmpty(headerAuth))
+                {
+                    var token = headerAuth.Split(' ')[1];
+                    string currentUserRedisKey = CreateCurentUserRedisKey(input.UserId);
+                    _redisListServices.AddItemAfterList(currentUserRedisKey, token);
+                }
+
+                return new LoginOutOutput
+                {
+                    Message = "Exit  Successfully"
+                };
+            }
+
             return new LoginOutOutput
             {
-                Message = "No  Thing"
+                Message = "Exit  Error"
             };
         }
 
