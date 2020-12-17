@@ -106,6 +106,11 @@ namespace WebApi.Application.Services
             };
         }
 
+        public ResetPasswordOuput ResetPassword(ResetPasswordInput input)
+        {
+            return new ResetPasswordOuput() { };
+         }
+
         /// <summary>
         /// 创建Jwt Token
         /// </summary>

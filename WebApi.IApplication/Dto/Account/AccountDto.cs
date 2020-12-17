@@ -64,4 +64,33 @@ namespace WebApi.IApplication.Dto.Account
         /// </summary>
         public string Message { set; get; }
     }
+
+    /// <summary>
+    /// 重置密码的输出
+    /// </summary>
+    public class ResetPasswordOuput
+    {
+        public string Message { set; get; }
+    }
+
+    /// <summary>
+    /// 重置密码的输入
+    /// </summary>
+    public class ResetPasswordInput
+    {
+        /// <summary>
+        /// 登陆用户的Id
+        /// </summary>
+        public int UserId { set; get; }
+
+        /// <summary>
+        /// 旧密码
+        /// </summary>
+        public string oldPassword{ set; get; }
+
+        /// <summary>
+        /// 新密码
+        /// </summary>
+        public string newPassword { set; get; }
+    }
 }

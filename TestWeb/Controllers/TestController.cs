@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,20 @@ namespace WebApi.Controllers
     public class TestController : WebApiBaseController
     {
 
-        private IHangefireServices _hangefireServices;
+        private IHangefireServices _hangefireServices = null;
 
-        public TestController(IHangefireServices hangefireServices)
+        private IMapper _mapper = null;
+
+        public TestController(IHangefireServices hangefireServices, IMapper mapper)
         {
             _hangefireServices = hangefireServices;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task DownloadImage()
         {
-             await _hangefireServices.DownloadImage();
+            await _hangefireServices.DownloadImage();
         }
 
         [HttpGet]
@@ -40,6 +44,45 @@ namespace WebApi.Controllers
             //RedisSetServices redis = new RedisSetServices();
             //redis.Test();
 
+        }
+
+        [HttpGet]
+        public void TestMapper()
+        {
+            People people = new People
+            {
+                Birthday = DateTime.Now,
+                Id = 1,
+                Name = "Tom",
+                Old = 20
+            };
+
+            var cp = _mapper.Map<ChinesePeople>(people);
+
+            var dd = _mapper.Map<People>(cp);
+        }
+
+
+        public class People
+        {
+            public int Id { set; get; }
+
+            public string Name { set; get; }
+
+            public double Old { set; get; }
+
+            public DateTime Birthday { set; get; }
+        }
+
+        public class ChinesePeople
+        {
+            public int Id { set; get; }
+
+            public string Name { set; get; }
+
+            public double Old { set; get; }
+
+            public DateTime Birthday { set; get; }
         }
     }
 }
