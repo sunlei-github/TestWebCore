@@ -23,5 +23,10 @@ namespace WebApi.IApplication.IServices.IAccount
         /// <returns></returns>
         LoginOutOutput LoginOut(LoginOutInput input);
 
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <returns></returns>
+        ResetPasswordOuput ResetPassword(ResetPasswordInput input);
     }
 }

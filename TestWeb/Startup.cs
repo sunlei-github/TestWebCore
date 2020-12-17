@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Caching.Memory;
+using AutoMapper;
 
 namespace WebApi
 {
@@ -40,6 +41,7 @@ namespace WebApi
 
             services.ConfMySqlServices(Configuration);
             services.ConfSwaggerServices(Configuration);
+            services.AddAutoMapper(typeof(AutoMapperModule).Assembly);
             //services.ConfHangfireServices(Configuration);
             services.AddSession();
             services.AddDistributedMemoryCache();   // 需要加上这个 否则在使用autofac容器之后再使用session会报错
